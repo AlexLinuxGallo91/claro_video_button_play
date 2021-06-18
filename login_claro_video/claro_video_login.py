@@ -32,3 +32,12 @@ class LoginClaroVideo:
         json_resp = json.loads(session.get(url_req).content)
 
         return json_resp
+
+    @staticmethod
+    def get_purchased_button_info_with_threading(group_id: int, acquired_resp_data: ResponseDataObj, session: Session,
+                                                 result: dict, key: str):
+        url_req = const.BTN_REQ_CLARO_VIDEO.format(
+            acquired_resp_data.authpt, acquired_resp_data.session_stringvalue, acquired_resp_data.user_id, group_id)
+        json_resp = json.loads(session.get(url_req).content)
+
+        result[key] = json_resp
