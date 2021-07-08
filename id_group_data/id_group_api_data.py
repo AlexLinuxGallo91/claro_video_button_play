@@ -28,9 +28,9 @@ class IdGroupApi:
     # -------------------------
     # Funcion principal.
     # -------------------------
-    def main(self):
+    def main(self, node_id, filter_id):
         # Datos iniciales de l aurl
-        idgrups = self.jsonidgrup(self.getParams())
+        idgrups = self.jsonidgrup(self.getParams(node_id, filter_id))
         # dict_json = json.dumps(idgrups, indent = 4)
         # print(dict_json)
         return idgrups
@@ -39,12 +39,12 @@ class IdGroupApi:
     # ----------------------------------------------
     # Parametros para enviar a la url del igrups ---
     # ----------------------------------------------
-    def getParams(self):
+    def getParams(self, node_id, filter_id):
         # Parametros para el request.
         params = {
             # ----------------------------
-            'filter_id' : 31069, # 9482 31069
-            'node_id' : None,
+            'filter_id' : filter_id, # 9482 31069
+            'node_id' : node_id, #None
             # ----------------------------
             'quantity' : '1',
             'from' : '0',
