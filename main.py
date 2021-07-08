@@ -9,7 +9,11 @@ session = requests.Session()
 group_id_list = []
 result_purchase_button_list = []
 
-acquired_resp_data = LoginClaroVideo.login_portal('dummy@gmail.com', 'dummy', session)
+hks = LoginClaroVideo.generate_hks()
+authpt = LoginClaroVideo.get_authpt(session)
+
+acquired_resp_data = LoginClaroVideo.get_starter_header_info(authpt, hks, session)
+acquired_resp_data = LoginClaroVideo.login_portal('correo', 'contrasenia', session, authpt, hks)
 acquired_resp_data = LoginClaroVideo.push_session(acquired_resp_data, session)
 
 # obtencion de la lista de id groups de la region mexico
@@ -19,4 +23,6 @@ group_id_list = id_group_json['idgrups']
 for chunk_id in IterableUtils.chunker(group_id_list, 100):
     result_purchase_button_list.extend(
         MultithreadingUtils.process_data_id_group_requests(chunk_id, session, acquired_resp_data))
+
+print(result_purchase_button_list)
 

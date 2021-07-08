@@ -1,6 +1,8 @@
+LOGIN_MAIN_PAGE = 'https://www.clarovideo.com'
+
 LOGIN_REQ_CLARO_VIDEO = 'https://mfwkweb-api.clarovideo.net/services/user/login?device_id=web&device_category=web&device_' \
                         'model=web&device_type=web&device_so=Firefox&format=json&device_manufacturer=generic&authpn=' \
-                        'webclient&authpt=tfg1h3j4k6fd7&api_version=v5.92&region=mexico&HKS=iihg3293ch82bhmtm9a9q6opd0&incl' \
+                        'webclient&authpt={}&api_version=v5.92&region=mexico&HKS={}&incl' \
                         'udpaywayprofile=true'
 
 PUSH_SESION_REQ_CLARO_VIDEO = "https://mfwkweb-api.clarovideo.net/services/user/push_session?user_id={}&" \
@@ -14,3 +16,18 @@ BTN_REQ_CLARO_VIDEO = 'https://mfwkweb-api.clarovideo.net/services/payway/purcha
                       'group_id={}'
 
 COOKIE_PHPSESSION_ID = 'PHPSESSID'
+
+POST_STARTER_HEADER_INFO = 'https://mfwkweb-api.clarovideo.net/services/user/startheaderinfo?device_id=' \
+                           'web&device_category=web&device_manufacturer=generic&device_model=web&device_type=web&' \
+                           'api_version=v5.93&authpn=webclient&authpt={}&format=json&device_so=Chrome&' \
+                           'HKS={}'
+
+REQUEST_URL_COMMON = 'http://10.20.1.92:9200/common_clarovideo/grupo/{}'
+
+ARG_CORREO = "correo"
+ARG_PASSWORD = "password"
+ARG_REGION = "region"
+ARG_NODO = "nodo"
+ARG_FILTER_ID = "filter_id"
+ARG_NODE_ID = "node_id"
+
