@@ -1,8 +1,11 @@
+import datetime
 import json
-from resp_objects.resp_user_data import ResponseDataObj
+
 from requests import Session
-from login_claro_video.claro_video_login import LoginClaroVideo
+
 from constants import constants as const
+from resp_objects.resp_user_data import ResponseDataObj
+
 
 class PurchaseBtnData:
 
@@ -25,6 +28,7 @@ class PurchaseBtnData:
 
         for region in json_resp['_source']['INFO_REGION_DERECHOS']:
             if region['REGION'] == 'MX':
+
                 fecha = region['FECHA_DESDE']
                 mes = fecha[4:6]
                 dia = fecha[6:8]
@@ -37,7 +41,11 @@ class PurchaseBtnData:
                 dia = fecha[6:8]
                 anio = fecha[:4]
 
+                date_until = datetime.datetime(int(anio), int(mes), int(dia))
                 json_expired_date_obtained['FECHA_HASTA'] = '{}-{}-{}'.format(dia, mes, anio)
+
+                is_in_force = 1 if date_until >= datetime.datetime.now() else 0
+                json_expired_date_obtained['VIGENCIA'] = is_in_force
 
         return json_expired_date_obtained
 
