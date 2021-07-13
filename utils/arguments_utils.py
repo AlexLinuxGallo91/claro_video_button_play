@@ -68,7 +68,7 @@ class ArgumentsUtils:
         result = True
 
         list_necessary_keys = [
-            constants.ARG_NODO, constants.ARG_PASSWORD, constants.ARG_NODE_ID, constants.ARG_CORREO,
+            constants.ARG_NODO, constants.ARG_PASSWORD, constants.ARG_NODE_ID, constants.ARG_USER,
             constants.ARG_REGION, constants.ARG_FILTER_ID
         ]
 

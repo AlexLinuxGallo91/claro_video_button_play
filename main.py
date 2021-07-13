@@ -24,7 +24,7 @@ authpt = LoginClaroVideo.get_authpt(session)
 
 # acquired_resp_data = LoginClaroVideo.get_starter_header_info(authpt, hks, session)
 acquired_resp_data = LoginClaroVideo.login_portal(
-    arguments_json['correo'], arguments_json['password'], session, authpt, hks, arguments_json['region'])
+    arguments_json['user'], arguments_json['password'], session, authpt, hks, arguments_json['region'])
 
 acquired_resp_data = LoginClaroVideo.push_session(acquired_resp_data, session, arguments_json['region'])
 

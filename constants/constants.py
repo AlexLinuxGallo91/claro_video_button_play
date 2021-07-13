@@ -29,7 +29,7 @@ POST_STARTER_HEADER_INFO = 'https://mfwkweb-api.clarovideo.net/services/user/sta
 
 REQUEST_URL_COMMON = 'http://10.20.1.92:9200/common_clarovideo/grupo/{}'
 
-ARG_CORREO = "correo"
+ARG_USER = "user"
 ARG_PASSWORD = "password"
 ARG_REGION = "region"
 ARG_NODO = "nodo"
