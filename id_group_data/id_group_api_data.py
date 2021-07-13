@@ -28,9 +28,9 @@ class IdGroupApi:
     # -------------------------
     # Funcion principal.
     # -------------------------
-    def main(self, node_id, filter_id):
+    def main(self, node_id, filter_id, region):
         # Datos iniciales de l aurl
-        idgrups = self.jsonidgrup(self.getParams(node_id, filter_id))
+        idgrups = self.jsonidgrup(self.getParams(node_id, filter_id, region))
         # dict_json = json.dumps(idgrups, indent = 4)
         # print(dict_json)
         return idgrups
@@ -39,7 +39,7 @@ class IdGroupApi:
     # ----------------------------------------------
     # Parametros para enviar a la url del igrups ---
     # ----------------------------------------------
-    def getParams(self, node_id, filter_id):
+    def getParams(self, node_id, filter_id, region):
         # Parametros para el request.
         params = {
             # ----------------------------
@@ -51,7 +51,7 @@ class IdGroupApi:
             'order_way' : 'ASC',
             'order_id' : '0',
             'level_id' : 'GPS',
-            'region' : 'mexico',
+            'region' : region,
             'device_id' : 'web',
             'device_category' : 'web',
             'device_model' : 'web',

@@ -1,6 +1,12 @@
+
+"""
+Clase el cual permite almacenar datos importantes como tokens y request parameters para reutilizarlos en cada peticion
+web que realicemos a la API de Claro Video.
+"""
 class ResponseDataObj:
 
     def __init__(self, json=None):
+
         self.user_id = ""
         self.parent_id = ""
         self.session_stringvalue = ""

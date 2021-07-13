@@ -1,6 +1,7 @@
 import datetime
 import json
 
+import requests
 from requests import Session
 
 from constants import constants as const
@@ -11,6 +12,14 @@ class PurchaseBtnData:
 
     @staticmethod
     def get_purchased_button_info(group_id: int, acquired_resp_data: ResponseDataObj, session: Session):
+        """
+        Metodo que se encarga de hacer una peticion a la api para obtener la informacion del boton de paga
+
+        :param group_id:
+        :param acquired_resp_data:
+        :param session:
+        :return:
+        """
         url_req = const.BTN_REQ_CLARO_VIDEO.format(
             acquired_resp_data.authpt, acquired_resp_data.session_stringvalue, acquired_resp_data.user_id, group_id)
         json_resp = json.loads(session.get(url_req).content)
@@ -19,6 +28,13 @@ class PurchaseBtnData:
 
     @staticmethod
     def get_expired_date_info(group_id: int, session: Session):
+        """
+        Metodo el cual permite obtener las fechas de vigencia con respecto a un group id prorpocionado
+
+        :param group_id:
+        :param session:
+        :return:
+        """
         url_req = const.REQUEST_URL_COMMON.format(group_id)
         json_text = session.get(url_req).content
         json_resp = json.loads(json_text)
@@ -51,16 +67,38 @@ class PurchaseBtnData:
 
     @staticmethod
     def get_purchased_button_info_with_threading(group_id: int, acquired_resp_data: ResponseDataObj, session: Session,
-                                                 result: dict, key: str):
+                                                 result: dict, key: str, region: str):
+        """
+        Metodo el cual permite obtener la informacion del boton de compra de una serie con respecto a su group id
+        y la informacion de las fechas de vigencia. Este metodo se llama por medio de multithreading y dentro del
+        mismo se mandan a llamar las dos funciones que obtienen la informacion de las fechas y boton de pago.
+
+        :param group_id: group id de la serie a buscar
+        :param acquired_resp_data:
+        :param session:
+        :param result:
+        :param key:
+        :param region:
+        :return:
+        """
         url_req = const.BTN_REQ_CLARO_VIDEO.format(
-            acquired_resp_data.authpt, acquired_resp_data.session_stringvalue, acquired_resp_data.user_id, group_id)
-        json_resp = json.loads(session.get(url_req).content)
+            acquired_resp_data.authpt, region, acquired_resp_data.session_stringvalue, acquired_resp_data.user_id,
+            group_id)
 
-        date_info_expiration = PurchaseBtnData.get_expired_date_info(group_id, session)
-        btn_purchase_info = json_resp['response']['playButton']
+        try:
+            resp = session.get(url_req).content
+            json_resp = json.loads(resp)
+            date_info_expiration = PurchaseBtnData.get_expired_date_info(group_id, session)
+            btn_purchase_info = json_resp['response']['playButton']
 
-        complete_json = {}
-        complete_json['date_info_expiration'] = date_info_expiration
-        complete_json['btn_purchase_info'] = btn_purchase_info
+            complete_json = {}
+            complete_json['date_info_expiration'] = date_info_expiration
+            complete_json['btn_purchase_info'] = btn_purchase_info
 
-        result[key] = complete_json
+            result[key] = complete_json
+        except json.decoder.JSONDecodeError:
+            pass
+        except requests.exceptions.ConnectionError:
+            pass
+        except TypeError:
+            pass
