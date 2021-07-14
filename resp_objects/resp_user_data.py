@@ -17,12 +17,29 @@ class ResponseDataObj:
         self.user_token = ""
         self.user_sesion = ""
 
-        if json:
-            self.user_id = json['response']['user_id']
-            self.parent_id = json['response']['parent_id']
-            self.session_stringvalue = json['response']['session_stringvalue']
-            self.authpt = json['entry']['authpt']
-            self.hks = json['entry']['HKS']
-            self.session_userhash = json['response']['session_userhash']
-            self.user_token = json['response']['user_token']
-            self.user_sesion = json['response']['user_session']
+        if json and 'response' in json:
+            if 'user_id' in json['response']:
+                self.user_id = json['response']['user_id']
+
+            if 'parent_id' in json['response']:
+                self.parent_id = json['response']['parent_id']
+
+            if 'session_stringvalue' in json['response']:
+                self.session_stringvalue = json['response']['session_stringvalue']
+
+            if 'session_userhash' in json['response']:
+                self.session_userhash = json['response']['session_userhash']
+
+            if 'user_token' in json['response']:
+                self.user_token = json['response']['user_token']
+
+            if 'user_session' in json['response']:
+                self.user_sesion = json['response']['user_session']
+
+        if json and 'entry' in json:
+            if 'authpt' in json['entry']:
+                self.authpt = json['entry']['authpt']
+
+            if 'HKS' in json['entry']:
+                self.hks = json['entry']['HKS']
+

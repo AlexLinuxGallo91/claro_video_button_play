@@ -32,7 +32,6 @@ REQUEST_URL_COMMON = 'http://10.20.1.92:9200/common_clarovideo/grupo/{}'
 ARG_USER = "user"
 ARG_PASSWORD = "password"
 ARG_REGION = "region"
-ARG_NODO = "nodo"
 ARG_FILTER_ID = "filter_id"
 ARG_NODE_ID = "node_id"
 
