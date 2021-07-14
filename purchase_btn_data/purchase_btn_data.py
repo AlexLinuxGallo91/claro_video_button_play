@@ -93,7 +93,7 @@ class PurchaseBtnData:
 
             complete_json = {}
             complete_json['date_info_expiration'] = date_info_expiration
-            complete_json['btn_purchase_info'] = btn_purchase_info
+            complete_json['playButton'] = btn_purchase_info
 
             result[key] = complete_json
         except json.decoder.JSONDecodeError:
