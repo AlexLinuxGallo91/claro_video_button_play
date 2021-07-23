@@ -19,6 +19,8 @@ lista_correos_destinatarios = ['alexis.araujo@triara.com',
 # filte id para la obtencion de los datos de fechas de vigencia y estado del play button
 job_list = ClientGearmanUtils.set_list_jobs()
 
+print(job_list)
+
 # se cargan o mandan los jobs al worker
 submitted_requests = gm_client.submit_multiple_jobs(job_list, background=False, wait_until_complete=False)
 
