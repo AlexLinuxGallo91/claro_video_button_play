@@ -35,3 +35,21 @@ ARG_REGION = "region"
 ARG_FILTER_ID = "filter_id"
 ARG_NODE_ID = "node_id"
 
+# HTML
+HTML_MSG_NOTIFICACION_PLAY_BUTTON = '<p>Se notifica una inconsistencia de imágenes, detectada en el monitoreo interno de ' \
+                               'Triara del Servicio de Claro Video:</p><br>'
+
+HTML_TABLE = '<table style="{}">{}</table>'
+HTML_TABLE_TR = '<tr style="{}">{}</tr>'
+HTML_TABLE_TH = '<th style="{}">{}</th>'
+HTML_TABLE_TD = '<td style="{}">{}</td>'
+HTML_HREF = '<a href="{}">{}</a>'
+
+# HTML STYLES
+HTML_STYLE_BORDER_TABLE = 'border: 1px dotted black; border-collapse: collapse; padding: 5px;'
+HTML_STYLE_HEADER = 'border: 1px dotted black; border-collapse: collapse; background: #DEEAF6; padding: 5px;'
+
+
+
+
+
