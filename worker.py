@@ -23,46 +23,48 @@ worker = GearmanWorker(['{}:{}'.format(host, puerto)])
 # el cual como resultado se obtiene una cadena en formato JSON
 def test_claro_video_play_button(gearman_worker, gearman_job):
 
-    hubo_error = False
-    msg_error = ''
-    arg = gearman_job.data
+    print(gearman_job.data)
 
-    # valida que el texto sea un json
-    try:
-        json_arg = json.loads(arg)
-    except ValueError:
-        msg_error = 'El argumento no es un json valido, favor de establecer el argumento correctamente.'
-        hubo_error = True
-
-    # valida que se encuentre la regios y el nodo establecido
-    if const.ARG_USER not in json_arg:
-        msg_error = 'Favor de establecer el parametro user dentro del JSON'
-        hubo_error = True
-    elif const.ARG_PASSWORD not in json_arg:
-        msg_error = 'Favor de establecer el parametro password dentro del JSON'
-        hubo_error = True
-    elif const.ARG_REGION not in json_arg:
-        msg_error = 'Favor de establecer el parametro region dentro del JSON'
-        hubo_error = True
-    elif const.ARG_FILTER_ID not in json_arg:
-        msg_error = 'Favor de establecer el parametro filter_id dentro del JSON'
-        hubo_error = True
-    elif const.ARG_NODE_ID not in json_arg:
-        msg_error = 'Favor de establecer el parametro node_id dentro del JSON'
-        hubo_error = True
-
-    try:
-        response = main_with_json_param(json_arg)
-    except Exception as e:
-        hubo_error = True
-        msg_error = 'Sucedio un error dentro de la ejecucion princial del Script: {}'.format(e)
-
-    if hubo_error:
-        const.RESPONSE_ERROR['msg'] = msg_error
-        const.RESPONSE_ERROR['error'] = hubo_error
-        return json.dumps(const.RESPONSE_ERROR)
-    else:
-        return response
+    # hubo_error = False
+    # msg_error = ''
+    # arg = gearman_job.data
+    #
+    # # valida que el texto sea un json
+    # try:
+    #     json_arg = json.loads(arg)
+    # except ValueError:
+    #     msg_error = 'El argumento no es un json valido, favor de establecer el argumento correctamente.'
+    #     hubo_error = True
+    #
+    # # valida que se encuentre la regios y el nodo establecido
+    # if const.ARG_USER not in json_arg:
+    #     msg_error = 'Favor de establecer el parametro user dentro del JSON'
+    #     hubo_error = True
+    # elif const.ARG_PASSWORD not in json_arg:
+    #     msg_error = 'Favor de establecer el parametro password dentro del JSON'
+    #     hubo_error = True
+    # elif const.ARG_REGION not in json_arg:
+    #     msg_error = 'Favor de establecer el parametro region dentro del JSON'
+    #     hubo_error = True
+    # elif const.ARG_FILTER_ID not in json_arg:
+    #     msg_error = 'Favor de establecer el parametro filter_id dentro del JSON'
+    #     hubo_error = True
+    # elif const.ARG_NODE_ID not in json_arg:
+    #     msg_error = 'Favor de establecer el parametro node_id dentro del JSON'
+    #     hubo_error = True
+    #
+    # try:
+    #     response = main_with_json_param(json_arg)
+    # except Exception as e:
+    #     hubo_error = True
+    #     msg_error = 'Sucedio un error dentro de la ejecucion princial del Script: {}'.format(e)
+    #
+    # if hubo_error:
+    #     const.RESPONSE_ERROR['msg'] = msg_error
+    #     const.RESPONSE_ERROR['error'] = hubo_error
+    #     return json.dumps(const.RESPONSE_ERROR)
+    # else:
+    #     return response
 
 worker.register_task('test_claro_video_play_button', test_claro_video_play_button)
 worker.work()

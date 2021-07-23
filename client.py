@@ -35,28 +35,29 @@ modo_debug = False
 for job_finished in completed_requests:
     result = job_finished.result
     try:
-        json_job_result = json.loads(result)
-        lista_result_response.append(json_job_result)
+        print(result)
+        # json_job_result = json.loads(result)
+        # lista_result_response.append(json_job_result)
     except ValueError:
         pass
     except TypeError:
         pass
-
-json_result = {}
-json_result['response'] = lista_result_response
-json_result_texto = json.dumps(json_result, indent=4)
-
-# print('{}\n'.format(json_result_texto))
-
-# valida si existen imagenes corruptas, en caso de ser asi se forma una tabla HTML para su notificacion por correo
-if JsonUtils.se_presentan_urls_imagenes_corruptas(json_result):
-    HTML = HtmlUtils.generar_html_table_errores_imagenes(json_result)
-    subject = MailUtils.subject_imagenes_dinamico(json_result)
-    resp = MailUtils.send_email(lista_correos_destinatarios, 'notificacion.itoc@triara.com', subject, HTML)
-    print(resp.text)
-
-if JsonUtils.se_presentan_secuencias_corruptas(json_result):
-    subject = MailUtils.subject_sequences_dinamico(json_result)
-    HTML = HtmlUtils.generar_html_table_errores_secuencias(json_result)
-    resp = MailUtils.send_email(lista_correos_destinatarios, 'notificacion.itoc@triara.com', subject, HTML)
-    print(resp.text)
+#
+# json_result = {}
+# json_result['response'] = lista_result_response
+# json_result_texto = json.dumps(json_result, indent=4)
+#
+# # print('{}\n'.format(json_result_texto))
+#
+# # valida si existen imagenes corruptas, en caso de ser asi se forma una tabla HTML para su notificacion por correo
+# if JsonUtils.se_presentan_urls_imagenes_corruptas(json_result):
+#     HTML = HtmlUtils.generar_html_table_errores_imagenes(json_result)
+#     subject = MailUtils.subject_imagenes_dinamico(json_result)
+#     resp = MailUtils.send_email(lista_correos_destinatarios, 'notificacion.itoc@triara.com', subject, HTML)
+#     print(resp.text)
+#
+# if JsonUtils.se_presentan_secuencias_corruptas(json_result):
+#     subject = MailUtils.subject_sequences_dinamico(json_result)
+#     HTML = HtmlUtils.generar_html_table_errores_secuencias(json_result)
+#     resp = MailUtils.send_email(lista_correos_destinatarios, 'notificacion.itoc@triara.com', subject, HTML)
+#     print(resp.text)
