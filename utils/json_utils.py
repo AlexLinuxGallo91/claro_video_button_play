@@ -9,7 +9,8 @@ class JsonUtils:
                 movie_serie_name = data_json_serie['date_info_expiration']['NOMBRE_INTERNO']
                 expiration_date = data_json_serie['date_info_expiration']['FECHA_HASTA']
                 validity = data_json_serie['date_info_expiration']['VIGENCIA']
-                push_btn_visible = data_json_serie['playButton']['visible']
+                group_id = data_json_serie['date_info_expiration']['group_id']
+                push_btn_visible = int(data_json_serie['playButton']['visible'])
 
                 print('movie_serie_name: {} - {}'.format(type(movie_serie_name), movie_serie_name))
                 print('expiration_date: {} - {}'.format(type(expiration_date), expiration_date))
