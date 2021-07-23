@@ -19,10 +19,10 @@ host = '127.0.0.1'
 puerto = '4770'
 worker = GearmanWorker(['{}:{}'.format(host, puerto)])
 
+
 # funcion encarga de comunicarse al modulo de experiencia de usuario OWA
 # el cual como resultado se obtiene una cadena en formato JSON
 def test_claro_video_play_button(gearman_worker, gearman_job):
-
     hubo_error = False
     msg_error = ''
     arg = gearman_job.data
@@ -64,6 +64,7 @@ def test_claro_video_play_button(gearman_worker, gearman_job):
         return json.dumps(const.RESPONSE_ERROR)
     else:
         return response
+
 
 worker.register_task('test_claro_video_play_button', test_claro_video_play_button)
 worker.work()

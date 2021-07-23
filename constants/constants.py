@@ -35,9 +35,11 @@ ARG_REGION = "region"
 ARG_FILTER_ID = "filter_id"
 ARG_NODE_ID = "node_id"
 
+SUBJECT_MAIL_INCONSISTENCIA_PLAY_BUTTON = 'Notificación de inconsistencia en play button de la región Mexico.'
+
 # HTML
-HTML_MSG_NOTIFICACION_PLAY_BUTTON = '<p>Se notifica una inconsistencia de imágenes, detectada en el monitoreo interno de ' \
-                               'Triara del Servicio de Claro Video:</p><br>'
+HTML_MSG_NOTIFICACION_PLAY_BUTTON = '<p>Se notifica una inconsistencia del boton de play, detectada en el monitoreo ' \
+                                    'interno de Triara del Servicio de Claro Video:</p><br>'
 
 HTML_TABLE = '<table style="{}">{}</table>'
 HTML_TABLE_TR = '<tr style="{}">{}</tr>'
@@ -49,6 +51,7 @@ HTML_HREF = '<a href="{}">{}</a>'
 HTML_STYLE_BORDER_TABLE = 'border: 1px dotted black; border-collapse: collapse; padding: 5px;'
 HTML_STYLE_HEADER = 'border: 1px dotted black; border-collapse: collapse; background: #DEEAF6; padding: 5px;'
 
+HTML_LISTA_HEADERS_PUSH_BUTTON = ['group_id', 'Titulo', 'Boton Play', 'Vigencia', 'Descripcion']
 
 
 

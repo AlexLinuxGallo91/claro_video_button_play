@@ -1,15 +1,14 @@
 import json
 from utils.json_utils import JsonUtils
-
+from utils.html_utils import HtmlUtils
 from python3_gearman import GearmanClient
 from utils.client_gearman_utils import ClientGearmanUtils
+from constants import constants as const
+from utils.mail_utils import MailUtils
 
 gm_client = GearmanClient(['localhost:4770'])
 
-lista_constantes_imagenes = ['SUCCESS', 'FAILED']
-pais_por_verificar = ''
 job_list = []
-contador_errores = 0
 lista_correos_destinatarios = ['alexis.araujo@triara.com',
                                'jose.hernandez@triara.com',
                                'gerardo.trevino@triara.com'
@@ -18,8 +17,6 @@ lista_correos_destinatarios = ['alexis.araujo@triara.com',
 # se establece una lista con los jobs a ejecutar, donde cada job contiene la region establecida y cada uno de los
 # filte id para la obtencion de los datos de fechas de vigencia y estado del play button
 job_list = ClientGearmanUtils.set_list_jobs()
-
-print(job_list)
 
 # se cargan o mandan los jobs al worker
 submitted_requests = gm_client.submit_multiple_jobs(job_list, background=False, wait_until_complete=False)
@@ -49,19 +46,12 @@ json_result['response'] = lista_result_response
 json_result_texto = json.dumps(json_result, indent=4)
 
 list_errors = JsonUtils.exist_errors_in_play_button_data(json_result, modo_debug)
-print(list_errors)
 
-#print('{}\n'.format(json_result_texto))
+# verifica que al menos no haya algun error localizado en la lista de errores/validaciones de las vigencias y push
+# buttons, en caso contrario, se envia la notificacion por email
+if len(list_errors) > 0:
+    HTML = HtmlUtils.generar_html_table_errores_imagenes(json_result)
+    subject = const.SUBJECT_MAIL_INCONSISTENCIA_PLAY_BUTTON
+    resp = MailUtils.send_email(lista_correos_destinatarios, 'notificacion.itoc@triara.com', subject, HTML)
+    print(resp.text)
 
-# # valida si existen imagenes corruptas, en caso de ser asi se forma una tabla HTML para su notificacion por correo
-# if JsonUtils.se_presentan_urls_imagenes_corruptas(json_result):
-#     HTML = HtmlUtils.generar_html_table_errores_imagenes(json_result)
-#     subject = MailUtils.subject_imagenes_dinamico(json_result)
-#     resp = MailUtils.send_email(lista_correos_destinatarios, 'notificacion.itoc@triara.com', subject, HTML)
-#     print(resp.text)
-#
-# if JsonUtils.se_presentan_secuencias_corruptas(json_result):
-#     subject = MailUtils.subject_sequences_dinamico(json_result)
-#     HTML = HtmlUtils.generar_html_table_errores_secuencias(json_result)
-#     resp = MailUtils.send_email(lista_correos_destinatarios, 'notificacion.itoc@triara.com', subject, HTML)
-#     print(resp.text)
