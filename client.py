@@ -32,7 +32,7 @@ json_error = {}
 json_error['error'] = []
 
 # DEBUG
-modo_debug = False
+modo_debug = True
 
 for job_finished in completed_requests:
     result = job_finished.result
@@ -48,7 +48,7 @@ json_result = {}
 json_result['response'] = lista_result_response
 json_result_texto = json.dumps(json_result, indent=4)
 
-list_errors = JsonUtils.exist_errors_in_play_button_data(json_result)
+list_errors = JsonUtils.exist_errors_in_play_button_data(json_result, modo_debug)
 print(list_errors)
 
 #print('{}\n'.format(json_result_texto))
