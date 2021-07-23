@@ -12,6 +12,7 @@ class JsonUtils:
                 v = data_json_serie['date_info_expiration']
 
                 print(v)
+                print(type(v))
 
                 json_data_expiration = []
                 json_data_expiration['movie_serie_name'] = data_json_serie['date_info_expiration']['NOMBRE_INTERNO']
