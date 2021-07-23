@@ -48,7 +48,8 @@ json_result = {}
 json_result['response'] = lista_result_response
 json_result_texto = json.dumps(json_result, indent=4)
 
-JsonUtils.exist_errors_in_play_button_data(json_result)
+list_errors = JsonUtils.exist_errors_in_play_button_data(json_result)
+print(list_errors)
 
 #print('{}\n'.format(json_result_texto))
 
