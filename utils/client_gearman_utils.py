@@ -8,15 +8,14 @@ class ClientGearmanUtils:
         job_list = []
         list_filter_id = [
             9482,
-            9482
             # 31069
         ]
         region = 'mexico'
 
         for filter_id in list_filter_id:
             data_args = {}
-            data_args['user'] = 'clarovideomty01@gmail.com'
-            data_args['password'] = 'C14r0.V1de0.12'
+            data_args['user'] = ''
+            data_args['password'] = ''
             data_args['region'] = region
             data_args['filter_id'] = filter_id
             data_args['node_id'] = ''
