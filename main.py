@@ -135,7 +135,7 @@ def main_with_json_param(json_arg: dict):
     result_purchase_button_list = {'result': result_purchase_button_list}
     json_string = json.dumps(result_purchase_button_list)
     session.close()
-    print(json_string)
+    return json_string
 
 
 if __name__ == '__main__':
