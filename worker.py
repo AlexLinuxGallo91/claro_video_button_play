@@ -24,6 +24,7 @@ worker = GearmanWorker(['{}:{}'.format(host, puerto)])
 def test_claro_video_play_button(gearman_worker, gearman_job):
 
     print(gearman_job.data)
+    return 'llego: {}'.format(gearman_job.data)
 
     # hubo_error = False
     # msg_error = ''
