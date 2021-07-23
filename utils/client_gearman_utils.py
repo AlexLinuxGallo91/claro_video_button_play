@@ -1,11 +1,15 @@
 import json
 
+
 class ClientGearmanUtils:
 
     @staticmethod
     def set_list_jobs():
         job_list = []
-        list_filter_id = [9482, 31069]
+        list_filter_id = [
+            9482,
+            # 31069
+        ]
         region = 'mexico'
 
         for filter_id in list_filter_id:
