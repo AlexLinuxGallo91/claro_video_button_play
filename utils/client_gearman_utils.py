@@ -8,6 +8,7 @@ class ClientGearmanUtils:
         job_list = []
         list_filter_id = [
             9482,
+            9482
             # 31069
         ]
         region = 'mexico'

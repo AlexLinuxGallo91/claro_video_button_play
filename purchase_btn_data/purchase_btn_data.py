@@ -62,6 +62,7 @@ class PurchaseBtnData:
 
                 is_in_force = 1 if date_until >= datetime.datetime.now() else 0
                 json_expired_date_obtained['VIGENCIA'] = is_in_force
+                json_expired_date_obtained['group_id'] = group_id
 
         return json_expired_date_obtained
 
