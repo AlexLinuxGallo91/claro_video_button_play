@@ -15,7 +15,9 @@ class JsonUtils:
                 print('movie_serie_name: {} - {}'.format(type(movie_serie_name), movie_serie_name))
                 print('expiration_date: {} - {}'.format(type(expiration_date), expiration_date))
                 print('validity: {} - {}'.format(type(validity), validity))
+                print('group_id: {} - {}'.format(type(group_id), group_id))
                 print('push_btn_visible: {} - {}'.format(type(push_btn_visible), push_btn_visible))
+
 
                 if debug_mode:
                     pass
