@@ -9,6 +9,8 @@ class JsonUtils:
         for json_result in json_result['response']:
             for data_json_serie in json_result['result']:
 
+                print(data_json_serie)
+
                 json_data_expiration = []
                 json_data_expiration['movie_serie_name'] = data_json_serie['date_info_expiration']['NOMBRE_INTERNO']
                 json_data_expiration['expiration_date'] = data_json_serie['date_info_expiration']['FECHA_HASTA']
