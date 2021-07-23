@@ -63,6 +63,7 @@ def test_claro_video_play_button(gearman_worker, gearman_job):
         const.RESPONSE_ERROR['error'] = hubo_error
         return json.dumps(const.RESPONSE_ERROR)
     else:
+        print('si llegamos')
         return response
 
 worker.register_task('test_claro_video_play_button', test_claro_video_play_button)
