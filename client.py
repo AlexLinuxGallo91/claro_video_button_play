@@ -1,5 +1,5 @@
 import json
-import sys
+from utils.json_utils import JsonUtils
 
 from python3_gearman import GearmanClient
 from utils.client_gearman_utils import ClientGearmanUtils
@@ -48,7 +48,9 @@ json_result = {}
 json_result['response'] = lista_result_response
 json_result_texto = json.dumps(json_result, indent=4)
 
-print('{}\n'.format(json_result_texto))
+JsonUtils.exist_errors_in_play_button_data(json_result)
+
+#print('{}\n'.format(json_result_texto))
 
 # # valida si existen imagenes corruptas, en caso de ser asi se forma una tabla HTML para su notificacion por correo
 # if JsonUtils.se_presentan_urls_imagenes_corruptas(json_result):
