@@ -1,25 +1,13 @@
-import json
-
+import sys
 
 class ClientGearmanUtils:
 
     @staticmethod
-    def set_list_jobs():
-        job_list = []
-        list_filter_id = [
-            9482,
-            # 31069
-        ]
-        region = 'mexico'
+    def set_job_data_dict():
 
-        for filter_id in list_filter_id:
-            data_args = {}
-            data_args['user'] = ''
-            data_args['password'] = ''
-            data_args['region'] = region
-            data_args['filter_id'] = filter_id
-            data_args['node_id'] = ''
-            data_args = json.dumps(data_args)
-            job_list.append(dict(task="test_claro_video_play_button", data=data_args))
+        #obtiene el argumento json
+        if len(sys.argv) < 2:
+            print('Favor de establecer el argumento JSON.')
+            sys.exit(1)
 
-        return job_list
+        return sys.argv[1]

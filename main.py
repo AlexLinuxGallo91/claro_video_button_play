@@ -7,6 +7,7 @@ from login_claro_video.claro_video_login import LoginClaroVideo
 from utils.iterable_utils import IterableUtils
 from utils.multithreading_utils import MultithreadingUtils
 from utils.arguments_utils import ArgumentsUtils
+from utils.json_utils import JsonUtils
 
 
 def main():
@@ -29,6 +30,11 @@ def main():
     script_arg_region = arguments_json['region']
     script_arg_filter_id = arguments_json['filter_id']
     script_arg_node_id = arguments_json['node_id']
+
+    """
+    se obtiene el nodo por medio del filter id y el node id
+    """
+    nodo_obtained = JsonUtils.verify_node_by_filter_and_node_id(script_arg_node_id, script_arg_filter_id)
 
     """
     Se realiza la obtencion de la lista de IdGroup de cada una de las series por la region, filter_id y node_id definidos
@@ -66,7 +72,7 @@ def main():
     for chunk_id in IterableUtils.chunker(group_id_list, 49):
         result_purchase_button_list.extend(
             MultithreadingUtils.process_data_id_group_requests(
-                chunk_id, session, acquired_resp_data, arguments_json['region']))
+                chunk_id, session, acquired_resp_data, arguments_json['region'], nodo_obtained))
 
     """
     Se convierte el array y dictionario final en una cadena en formato JSON y se imprime en consola
@@ -91,6 +97,11 @@ def main_with_json_param(json_arg: dict):
     script_arg_region = json_arg['region']
     script_arg_filter_id = json_arg['filter_id']
     script_arg_node_id = json_arg['node_id']
+
+    """
+    se obtiene el nodo por medio del filter id y el node id
+    """
+    nodo_obtained = JsonUtils.verify_node_by_filter_and_node_id(script_arg_node_id, script_arg_filter_id)
 
     """
     Se realiza la obtencion de la lista de IdGroup de cada una de las series por la region, filter_id y node_id definidos

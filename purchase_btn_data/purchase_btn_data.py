@@ -44,7 +44,6 @@ class PurchaseBtnData:
 
         for region in json_resp['_source']['INFO_REGION_DERECHOS']:
             if region['REGION'] == 'MX':
-
                 fecha = region['FECHA_DESDE']
                 mes = fecha[4:6]
                 dia = fecha[6:8]
@@ -68,7 +67,7 @@ class PurchaseBtnData:
 
     @staticmethod
     def get_purchased_button_info_with_threading(group_id: int, acquired_resp_data: ResponseDataObj, session: Session,
-                                                 result: dict, key: str, region: str):
+                                                 result: dict, key: str, region: str, nodo_obtained: str):
         """
         Metodo el cual permite obtener la informacion del boton de compra de una serie con respecto a su group id
         y la informacion de las fechas de vigencia. Este metodo se llama por medio de multithreading y dentro del
@@ -80,6 +79,7 @@ class PurchaseBtnData:
         :param result:
         :param key:
         :param region:
+        :param nodo_obtained:
         :return:
         """
         url_req = const.BTN_REQ_CLARO_VIDEO.format(
@@ -95,6 +95,7 @@ class PurchaseBtnData:
             complete_json = {}
             complete_json['date_info_expiration'] = date_info_expiration
             complete_json['playButton'] = btn_purchase_info
+            complete_json['nodo'] = nodo_obtained
 
             result[key] = complete_json
         except json.decoder.JSONDecodeError:
