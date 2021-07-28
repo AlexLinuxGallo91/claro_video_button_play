@@ -78,7 +78,7 @@ class JsonUtils:
     def exist_errors_in_play_button_data(json_result: dict, debug_mode: bool = False):
         error_list = []
 
-        for json_result in json_result['response']:
+        if 'result' in json_result:
             for data_json_serie in json_result['result']:
 
                 json_data_expiration = {}

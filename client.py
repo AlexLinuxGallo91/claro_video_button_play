@@ -2,7 +2,11 @@ import json
 
 from python3_gearman import GearmanClient
 import sys
+from utils.html_utils import HtmlUtils
 from utils.client_gearman_utils import ClientGearmanUtils
+from utils.json_utils import JsonUtils
+from utils.mail_utils import MailUtils
+import constants.constants as const
 
 gm_client = GearmanClient(['localhost:4770'])
 
@@ -30,18 +34,17 @@ except TypeError as e:
     print(e)
 
 if 'error' in json_job_result:
-    print(json.dumps(json_job_result, indent=4))
+    print(json.dumps(json_job_result, indent=4, sort_keys=True))
     sys.exit(1)
 elif 'result' in json_job_result:
-    print(json_job_result)
-    #print(json.dumps(json_job_result, indent=4))
+    print(json.dumps(json_job_result, indent=4, sort_keys=True))
 
-# list_errors = JsonUtils.exist_errors_in_play_button_data(json_job_result, modo_debug)
-#
-# # verifica que al menos no haya algun error localizado en la lista de errores/validaciones de las vigencias y push
-# # buttons, en caso contrario, se envia la notificacion por email
-# if len(list_errors) > 0:
-#     HTML = HtmlUtils.generate_html_table_errors_push_buttons(list_errors)
-#     subject = const.SUBJECT_MAIL_INCONSISTENCIA_PLAY_BUTTON
-#     resp = MailUtils.send_email(lista_correos_destinatarios, 'notificacion.itoc@triara.com', subject, HTML)
-#     print(resp.text)
+list_errors = JsonUtils.exist_errors_in_play_button_data(json_job_result, modo_debug)
+
+# verifica que al menos no haya algun error localizado en la lista de errores/validaciones de las vigencias y push
+# buttons, en caso contrario, se envia la notificacion por email
+if len(list_errors) > 0:
+    HTML = HtmlUtils.generate_html_table_errors_push_buttons(list_errors)
+    subject = const.SUBJECT_MAIL_INCONSISTENCIA_PLAY_BUTTON
+    resp = MailUtils.send_email(lista_correos_destinatarios, 'notificacion.itoc@triara.com', subject, HTML)
+    print(resp.text)
