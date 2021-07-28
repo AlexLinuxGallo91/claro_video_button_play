@@ -25,8 +25,6 @@ modo_debug = True
 
 try:
     json_result = json.loads(job.result)
-    json_result = json.loads(json_result)
-    print(type(json_result))
 except ValueError as e:
     print(e)
     sys.exit(1)
@@ -40,10 +38,6 @@ if 'hubo_error' in json_result:
     print(json.dumps(json_result, indent=4, sort_keys=True))
     sys.exit(1)
 elif 'result' in json_result:
-
-    result = json_result['result']
-    print(result)
-    print(type(result))
     list_errors = JsonUtils.exist_errors_in_play_button_data(json_result, modo_debug)
 
     # verifica que al menos no haya algun error localizado en la lista de errores/validaciones de las vigencias y push
