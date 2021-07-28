@@ -30,6 +30,7 @@ modo_debug = True
 
 try:
     json_job_result = json.loads(job.result)
+    print(json_job_result)
     lista_result_response.append(json_job_result)
 except ValueError:
     pass
@@ -39,8 +40,6 @@ except TypeError:
 json_result = {}
 json_result['response'] = lista_result_response
 json_result_text = json.dumps(json_result, indent=4)
-
-print(json_result_text)
 
 list_errors = JsonUtils.exist_errors_in_play_button_data(json_result, modo_debug)
 
