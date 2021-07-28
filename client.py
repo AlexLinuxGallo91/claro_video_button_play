@@ -24,9 +24,9 @@ job = gm_client.submit_job(task='test_claro_video_play_button', data=data,
 modo_debug = True
 
 try:
-    job_result = job.result
-    json_result = json.loads(job_result)
-    json_result = json.loads(json_result)
+    print(job.result)
+    print(type(job.result))
+    json_result = json.loads(job.result)
     print(type(json_result))
 except ValueError as e:
     print(e)
