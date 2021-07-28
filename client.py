@@ -32,8 +32,9 @@ except TypeError as e:
 if 'error' in json_job_result:
     print(json.dumps(json_job_result, indent=4))
     sys.exit(1)
-else:
-    print(json.dumps(json_job_result, indent=4))
+elif 'result' in json_job_result:
+    print(json_job_result)
+    #print(json.dumps(json_job_result, indent=4))
 
 # list_errors = JsonUtils.exist_errors_in_play_button_data(json_job_result, modo_debug)
 #
