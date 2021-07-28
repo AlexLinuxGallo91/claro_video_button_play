@@ -61,6 +61,7 @@ def test_claro_video_play_button(gearman_worker, gearman_job):
         msg_error = 'Sucedio un error dentro de la ejecucion princial del Script: {}'.format(e)
 
     if hubo_error:
+        print('valio :(')
         const.RESPONSE_ERROR['msg'] = msg_error
         const.RESPONSE_ERROR['error'] = hubo_error
         return json.dumps(const.RESPONSE_ERROR)
