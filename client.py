@@ -16,7 +16,7 @@ lista_correos_destinatarios = ['alexis.araujo@triara.com',
 # se cargan o mandan los jobs al worker
 data = ClientGearmanUtils.set_job_data_dict()
 job = gm_client.submit_job(task='test_claro_video_play_button', data=data,
-                           background=False, wait_until_complete=False, poll_timeout=300.0)
+                           background=False, wait_until_complete=True, poll_timeout=300.0)
 
 lista_result_response = []
 json_error = {}
