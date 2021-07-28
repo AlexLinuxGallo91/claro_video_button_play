@@ -37,6 +37,7 @@ def test_claro_video_play_button(gearman_worker, gearman_job):
     except ValueError:
         msg_error = 'El argumento no es un json valido, favor de establecer el argumento correctamente.'
         hubo_error = True
+        print('oopsie')
 
     # valida que se encuentre la regios y el nodo establecido
     if const.ARG_USER not in json_arg:
