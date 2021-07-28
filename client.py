@@ -29,11 +29,11 @@ except ValueError as e:
 except TypeError as e:
     print(e)
 
-json_result_text = json.dumps(json_job_result, indent=4)
-
-if 'error' in json_result_text:
-    print(json_result_text['error'])
+if 'error' in json_job_result:
+    print(json.dumps(json_job_result, indent=4))
     sys.exit(1)
+else:
+    print(json.dumps(json_job_result, indent=4))
 
 # list_errors = JsonUtils.exist_errors_in_play_button_data(json_job_result, modo_debug)
 #
