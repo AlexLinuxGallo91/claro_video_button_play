@@ -37,7 +37,8 @@ if 'error' in json_job_result:
     print(json.dumps(json_job_result, indent=4, sort_keys=True))
     sys.exit(1)
 elif 'result' in json_job_result:
-    print(json.dumps(json_job_result, indent=4, sort_keys=True))
+    # print(json.dumps(json_job_result, indent=4, sort_keys=True))
+    print(json_job_result)
 
 list_errors = JsonUtils.exist_errors_in_play_button_data(json_job_result, modo_debug)
 
