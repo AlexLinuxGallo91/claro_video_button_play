@@ -32,10 +32,7 @@ except TypeError as e:
     print(e)
     sys.exit(1)
 
-print(json_job_result)
-print(type(json_job_result))
-
-if 'error' in json_job_result:
+if 'hubo_error' in json_job_result:
     print(json.dumps(json_job_result, indent=4, sort_keys=True))
     sys.exit(1)
 elif 'result' in json_job_result:
