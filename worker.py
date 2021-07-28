@@ -64,8 +64,9 @@ def test_claro_video_play_button(gearman_worker, gearman_job):
 
     if hubo_error:
         print('valio :(')
-        const.RESPONSE_ERROR['msg'] = msg_error
-        const.RESPONSE_ERROR['error'] = hubo_error
+        response_error = {}
+        response_error['msg'] = msg_error
+        response_error['error'] = hubo_error
         return json.dumps(const.RESPONSE_ERROR)
     else:
         return response
