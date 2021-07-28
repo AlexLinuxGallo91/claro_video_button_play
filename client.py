@@ -26,14 +26,15 @@ json_error['error'] = []
 modo_debug = True
 
 try:
+    print(job.result)
     json_job_result = json.loads(job.result)
     print('imprimiendo')
     print(json_job_result)
     lista_result_response.append(json_job_result)
-except ValueError:
-    pass
-except TypeError:
-    pass
+except ValueError as e:
+    print(e)
+except TypeError as e:
+    print(e)
 
 json_result = {}
 json_result['response'] = lista_result_response
