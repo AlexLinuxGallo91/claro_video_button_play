@@ -32,6 +32,7 @@ def test_claro_video_play_button(gearman_worker, gearman_job):
 
     # valida que el texto sea un json
     try:
+        print('intentando convertir el json')
         json_arg = json.loads(arg)
     except ValueError:
         msg_error = 'El argumento no es un json valido, favor de establecer el argumento correctamente.'
