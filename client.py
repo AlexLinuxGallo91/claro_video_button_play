@@ -15,9 +15,6 @@ lista_correos_destinatarios = ['alexis.araujo@triara.com',
 
 # se cargan o mandan los jobs al worker
 data = ClientGearmanUtils.set_job_data_dict()
-
-print('datos obteniodos: {}'.format(data))
-
 job = gm_client.submit_job(task='test_claro_video_play_button', data=data,
                            background=False, wait_until_complete=False, poll_timeout=300.0)
 
@@ -30,6 +27,7 @@ modo_debug = True
 
 try:
     json_job_result = json.loads(job.result)
+    print('imprimiendo')
     print(json_job_result)
     lista_result_response.append(json_job_result)
 except ValueError:
