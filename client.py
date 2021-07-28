@@ -30,8 +30,6 @@ except ValueError as e:
 except TypeError as e:
     print(e)
 
-# json_result = {}
-# json_result['response'] = lista_result_response
 json_result_text = json.dumps(json_job_result, indent=4)
 print(json_result_text)
 
