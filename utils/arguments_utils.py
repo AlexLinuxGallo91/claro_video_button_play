@@ -8,7 +8,7 @@ class ArgumentsUtils:
     @staticmethod
     def convert_string_to_int(arg: str):
         try:
-            return int(str)
+            return int(arg)
         except ValueError:
             return 0
 
