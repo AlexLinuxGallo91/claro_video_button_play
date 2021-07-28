@@ -1,10 +1,8 @@
 import json
-from utils.json_utils import JsonUtils
-from utils.html_utils import HtmlUtils
+
 from python3_gearman import GearmanClient
+import sys
 from utils.client_gearman_utils import ClientGearmanUtils
-from constants import constants as const
-from utils.mail_utils import MailUtils
 
 gm_client = GearmanClient(['localhost:4770'])
 
@@ -36,6 +34,10 @@ except TypeError as e:
 # json_result['response'] = lista_result_response
 json_result_text = json.dumps(json_job_result, indent=4)
 print(json_result_text)
+
+if 'error' in json_result_text:
+    print(json_result_text['error'])
+    sys.exit(1)
 
 # list_errors = JsonUtils.exist_errors_in_play_button_data(json_job_result, modo_debug)
 #

@@ -23,60 +23,56 @@ worker = GearmanWorker(['{}:{}'.format(host, puerto)])
 # funcion encarga de comunicarse al modulo de experiencia de usuario OWA
 # el cual como resultado se obtiene una cadena en formato JSON
 def test_claro_video_play_button(gearman_worker, gearman_job):
-    hubo_error = False
-    msg_error = ''
-    arg = gearman_job.data
+    response_error = {
+        'hubo_error': False,
+        'msg_error': ''
+    }
 
-    """debug"""
-    print('entrando al worker: {}'.format(arg))
+    arg = gearman_job.data
 
     # valida que el texto sea un json
     try:
-        print('intentando convertir el json')
         json_arg = json.loads(arg)
     except ValueError:
-        msg_error = 'El argumento no es un json valido, favor de establecer el argumento correctamente.'
-        hubo_error = True
-        print('oopsie')
-
-        print('valio :(')
-        response_error = {}
-        response_error['msg'] = msg_error
-        response_error['error'] = hubo_error
-        print(response_error)
-        return json.dumps(response_error)
+        response_error['msg_error'] = 'El argumento no es un json valido, favor de establecer el argumento ' \
+                                      'correctamente.'
+        response_error['hubo_error'] = True
+        return response_error
 
     # valida que se encuentre la regios y el nodo establecido
     if const.ARG_USER not in json_arg:
-        msg_error = 'Favor de establecer el parametro user dentro del JSON'
-        hubo_error = True
+        response_error['msg_error'] = 'Favor de establecer el parametro user dentro del JSON.'
+        response_error['hubo_error'] = True
+        return response_error
+
     elif const.ARG_PASSWORD not in json_arg:
-        msg_error = 'Favor de establecer el parametro password dentro del JSON'
-        hubo_error = True
+        response_error['msg_error'] = 'Favor de establecer el parametro password dentro del JSON.'
+        response_error['hubo_error'] = True
+        return response_error
+
     elif const.ARG_REGION not in json_arg:
-        msg_error = 'Favor de establecer el parametro region dentro del JSON'
-        hubo_error = True
+        response_error['msg_error'] = 'Favor de establecer el parametro region dentro del JSON.'
+        response_error['hubo_error'] = True
+        return response_error
+
     elif const.ARG_FILTER_ID not in json_arg:
-        msg_error = 'Favor de establecer el parametro filter_id dentro del JSON'
-        hubo_error = True
+        response_error['msg_error'] = 'Favor de establecer el parametro filter_id dentro del JSON.'
+        response_error['hubo_error'] = True
+        return response_error
+
     elif const.ARG_NODE_ID not in json_arg:
-        msg_error = 'Favor de establecer el parametro node_id dentro del JSON'
-        hubo_error = True
+        response_error['msg_error'] = 'Favor de establecer el parametro node_id dentro del JSON.'
+        response_error['hubo_error'] = True
+        return response_error
 
     try:
-        print('vamos a ejecutarlo >:( ')
         response = main_with_json_param(json_arg)
     except Exception as e:
-        hubo_error = True
-        msg_error = 'Sucedio un error dentro de la ejecucion princial del Script: {}'.format(e)
+        response_error['msg_error'] = 'Sucedio un error en la ejecucion del worker: {}.'.format(e)
+        response_error['hubo_error'] = True
+        return response_error
 
-    if hubo_error:
-        print('valio :(')
-        response_error = {}
-        response_error['msg'] = msg_error
-        response_error['error'] = hubo_error
-        return json.dumps(response_error)
-    else:
+        # en caso de que la ejecucion sea exitosa, se regresa el resultado en formato JSON
         return response
 
 
