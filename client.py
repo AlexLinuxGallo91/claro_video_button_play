@@ -40,6 +40,8 @@ json_result = {}
 json_result['response'] = lista_result_response
 json_result_text = json.dumps(json_result, indent=4)
 
+print(json_result_text)
+
 list_errors = JsonUtils.exist_errors_in_play_button_data(json_result, modo_debug)
 
 # verifica que al menos no haya algun error localizado en la lista de errores/validaciones de las vigencias y push
