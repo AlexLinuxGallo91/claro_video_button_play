@@ -33,6 +33,7 @@ except TypeError as e:
     sys.exit(1)
 
 print(json_job_result)
+print(type(json_job_result))
 
 if 'error' in json_job_result:
     print(json.dumps(json_job_result, indent=4, sort_keys=True))
