@@ -24,14 +24,12 @@ modo_debug = True
 
 try:
     json_job_result = json.loads(job.result)
-    print(json_job_result)
 except ValueError as e:
     print(e)
 except TypeError as e:
     print(e)
 
 json_result_text = json.dumps(json_job_result, indent=4)
-print(json_result_text)
 
 if 'error' in json_result_text:
     print(json_result_text['error'])
