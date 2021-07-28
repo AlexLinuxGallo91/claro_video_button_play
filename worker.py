@@ -57,6 +57,7 @@ def test_claro_video_play_button(gearman_worker, gearman_job):
         hubo_error = True
 
     try:
+        print('vamos a ejecutarlo >:( ')
         response = main_with_json_param(json_arg)
     except Exception as e:
         hubo_error = True
