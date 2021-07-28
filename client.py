@@ -37,7 +37,9 @@ if 'hubo_error' in json_job_result:
     sys.exit(1)
 elif 'result' in json_job_result:
 
-    print(type(json_job_result))
+    result = json_job_result['result']
+    print(result)
+    print(type(result))
     list_errors = JsonUtils.exist_errors_in_play_button_data(json_job_result, modo_debug)
 
     # verifica que al menos no haya algun error localizado en la lista de errores/validaciones de las vigencias y push
