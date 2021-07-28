@@ -39,6 +39,12 @@ def test_claro_video_play_button(gearman_worker, gearman_job):
         hubo_error = True
         print('oopsie')
 
+        print('valio :(')
+        response_error = {}
+        response_error['msg'] = msg_error
+        response_error['error'] = hubo_error
+        return json.dumps(response_error)
+
     # valida que se encuentre la regios y el nodo establecido
     if const.ARG_USER not in json_arg:
         msg_error = 'Favor de establecer el parametro user dentro del JSON'
