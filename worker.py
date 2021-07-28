@@ -37,43 +37,42 @@ def test_claro_video_play_button(gearman_worker, gearman_job):
         response_error['msg_error'] = 'El argumento no es un json valido, favor de establecer el argumento ' \
                                       'correctamente.'
         response_error['hubo_error'] = True
-        return response_error
 
     # valida que se encuentre la regios y el nodo establecido
-    if const.ARG_USER not in json_arg:
+    if response_error['hubo_error'] is False and const.ARG_USER not in json_arg:
         response_error['msg_error'] = 'Favor de establecer el parametro user dentro del JSON.'
         response_error['hubo_error'] = True
-        return response_error
 
-    elif const.ARG_PASSWORD not in json_arg:
+    elif response_error['hubo_error'] is False and const.ARG_PASSWORD not in json_arg:
         response_error['msg_error'] = 'Favor de establecer el parametro password dentro del JSON.'
         response_error['hubo_error'] = True
-        return response_error
 
-    elif const.ARG_REGION not in json_arg:
+    elif response_error['hubo_error'] is False and const.ARG_REGION not in json_arg:
         response_error['msg_error'] = 'Favor de establecer el parametro region dentro del JSON.'
         response_error['hubo_error'] = True
-        return response_error
 
-    elif const.ARG_FILTER_ID not in json_arg:
+    elif response_error['hubo_error'] is False and const.ARG_FILTER_ID not in json_arg:
         response_error['msg_error'] = 'Favor de establecer el parametro filter_id dentro del JSON.'
         response_error['hubo_error'] = True
-        return response_error
 
-    elif const.ARG_NODE_ID not in json_arg:
+    elif response_error['hubo_error'] is False and const.ARG_NODE_ID not in json_arg:
         response_error['msg_error'] = 'Favor de establecer el parametro node_id dentro del JSON.'
         response_error['hubo_error'] = True
-        return response_error
+
+    if response_error['hubo_error']:
+        return json.dumps(response_error, indent=4)
 
     try:
         response = main_with_json_param(json_arg)
+        response = json.dumps(response, indent=4)
+
     except Exception as e:
         response_error['msg_error'] = 'Sucedio un error en la ejecucion del worker: {}.'.format(e)
         response_error['hubo_error'] = True
-        return response_error
+        return json.dumps(response_error, indent=4)
 
-        # en caso de que la ejecucion sea exitosa, se regresa el resultado en formato JSON
-        return response
+    # en caso de que la ejecucion sea exitosa, se regresa el resultado en formato JSON
+    return response
 
 
 worker.register_task('test_claro_video_play_button', test_claro_video_play_button)
