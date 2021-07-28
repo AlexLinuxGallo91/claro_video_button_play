@@ -32,8 +32,8 @@ class HtmlUtils:
             validity = 'SI' if validity == 1 else 'NO'
             push_btn_visible = 'ACTIVO' if push_btn_visible == 1 else 'INACTIVO'
 
-            cadena_td_html = const.HTML_TABLE_TD.format(const.HTML_STYLE_BORDER_TABLE, group_id)
-            cadena_td_html += const.HTML_TABLE_TD.format(const.HTML_STYLE_BORDER_TABLE, nodo)
+            cadena_td_html = const.HTML_TABLE_TD.format(const.HTML_STYLE_BORDER_TABLE, nodo)
+            cadena_td_html += const.HTML_TABLE_TD.format(const.HTML_STYLE_BORDER_TABLE, group_id)
             cadena_td_html += const.HTML_TABLE_TD.format(const.HTML_STYLE_BORDER_TABLE, movie_serie_name)
             cadena_td_html += const.HTML_TABLE_TD.format(const.HTML_STYLE_BORDER_TABLE, push_btn_visible)
             cadena_td_html += const.HTML_TABLE_TD.format(const.HTML_STYLE_BORDER_TABLE, validity)
