@@ -43,6 +43,7 @@ def test_claro_video_play_button(gearman_worker, gearman_job):
         response_error = {}
         response_error['msg'] = msg_error
         response_error['error'] = hubo_error
+        print(response_error)
         return json.dumps(response_error)
 
     # valida que se encuentre la regios y el nodo establecido
