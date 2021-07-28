@@ -60,6 +60,7 @@ def test_claro_video_play_button(gearman_worker, gearman_job):
         response_error['hubo_error'] = True
 
     if response_error['hubo_error']:
+        print('hubo problema')
         return json.dumps(response_error, indent=4)
 
     try:

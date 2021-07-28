@@ -20,9 +20,6 @@ data = ClientGearmanUtils.set_job_data_dict()
 job = gm_client.submit_job(task='test_claro_video_play_button', data=data,
                            background=False, wait_until_complete=True, poll_timeout=300.0)
 
-json_error = {}
-json_error['error'] = []
-
 # bandera para debug
 modo_debug = True
 
