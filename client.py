@@ -32,8 +32,6 @@ except TypeError as e:
     print(e)
     sys.exit(1)
 
-print(type(json_result))
-
 if 'hubo_error' in json_result:
     print(json.dumps(json_result, indent=4, sort_keys=True))
     sys.exit(1)
