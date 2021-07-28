@@ -83,8 +83,8 @@ def main():
 
     return json_string
 
-def main_with_json_param(json_arg: dict):
 
+def main_with_json_param(json_arg: dict):
     session = requests.Session()
     group_id_list = None
     result_purchase_button_list = []
@@ -101,7 +101,11 @@ def main_with_json_param(json_arg: dict):
     """
     se obtiene el nodo por medio del filter id y el node id
     """
-    nodo_obtained = JsonUtils.verify_node_by_filter_and_node_id(script_arg_node_id, script_arg_filter_id)
+    nodo_obtained = JsonUtils.verify_node_by_filter_and_node_id(
+        ArgumentsUtils.convert_string_to_int(script_arg_node_id),
+        ArgumentsUtils.convert_string_to_int(script_arg_filter_id)
+    )
+
     print('nodo obtenido: {}'.format(nodo_obtained))
     """
     Se realiza la obtencion de la lista de IdGroup de cada una de las series por la region, filter_id y node_id definidos
@@ -153,4 +157,3 @@ def main_with_json_param(json_arg: dict):
 
 if __name__ == '__main__':
     main()
-

@@ -6,6 +6,13 @@ from constants import constants
 class ArgumentsUtils:
 
     @staticmethod
+    def convert_string_to_int(arg: str):
+        try:
+            return int(str)
+        except ValueError:
+            return 0
+
+    @staticmethod
     def verify_argument():
         """
         Metodo que se encarga de validar los argumentos entrantes en la ejecucion principal del Script
