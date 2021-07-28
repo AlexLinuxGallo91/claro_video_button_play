@@ -5,7 +5,7 @@ from constants import constants as const
 class JsonUtils:
 
     @staticmethod
-    def verify_node_by_filter_and_node_id(node_id: int, filter_id: int):
+    def verify_node_by_filter_and_node_id(node_id: str, filter_id: str):
         nodo_result = ''
 
         if node_id == const.CAT_NODE_ID_CATALAGO_PELICULAS:
