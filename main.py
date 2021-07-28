@@ -139,7 +139,7 @@ def main_with_json_param(json_arg: dict):
     for chunk_id in IterableUtils.chunker(group_id_list, 49):
         result_purchase_button_list.extend(
             MultithreadingUtils.process_data_id_group_requests(
-                chunk_id, session, acquired_resp_data, json_arg['region']))
+                chunk_id, session, acquired_resp_data, json_arg['region'], nodo_obtained))
 
     """
     Se convierte el array y dictionario final en una cadena en formato JSON y se imprime en consola
