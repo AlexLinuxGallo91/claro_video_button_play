@@ -28,7 +28,7 @@ modo_debug = True
 
 try:
     json_job_result = json.loads(job.result)
-    print(type(job.result))
+    json_job_result = json.loads(json_job_result)
 except ValueError as e:
     print(e)
     sys.exit(1)
