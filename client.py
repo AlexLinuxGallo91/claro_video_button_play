@@ -24,8 +24,9 @@ job = gm_client.submit_job(task='test_claro_video_play_button', data=data,
 modo_debug = True
 
 try:
-    json_job_result = json.loads(job.result)
-    print(type(json_job_result))
+    job_result = job.result
+    json_result = json.loads(job_result)
+    print(type(json_result))
 except ValueError as e:
     print(e)
     sys.exit(1)
@@ -33,17 +34,17 @@ except TypeError as e:
     print(e)
     sys.exit(1)
 
-print(type(json_job_result))
+print(type(json_result))
 
-if 'hubo_error' in json_job_result:
-    print(json.dumps(json_job_result, indent=4, sort_keys=True))
+if 'hubo_error' in json_result:
+    print(json.dumps(json_result, indent=4, sort_keys=True))
     sys.exit(1)
-elif 'result' in json_job_result:
+elif 'result' in json_result:
 
-    result = json_job_result['result']
+    result = json_result['result']
     print(result)
     print(type(result))
-    list_errors = JsonUtils.exist_errors_in_play_button_data(json_job_result, modo_debug)
+    list_errors = JsonUtils.exist_errors_in_play_button_data(json_result, modo_debug)
 
     # verifica que al menos no haya algun error localizado en la lista de errores/validaciones de las vigencias y push
     # buttons, en caso contrario, se envia la notificacion por email
