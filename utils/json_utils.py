@@ -79,6 +79,9 @@ class JsonUtils:
         error_list = []
 
         if 'result' in json_result:
+
+            print(type(json_result['result']))
+
             for data_json_serie in json_result['result']:
 
                 json_data_expiration = {}
