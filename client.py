@@ -18,7 +18,6 @@ data = ClientGearmanUtils.set_job_data_dict()
 job = gm_client.submit_job(task='test_claro_video_play_button', data=data,
                            background=False, wait_until_complete=True, poll_timeout=300.0)
 
-lista_result_response = []
 json_error = {}
 json_error['error'] = []
 
@@ -26,21 +25,18 @@ json_error['error'] = []
 modo_debug = True
 
 try:
-    print(job.result)
     json_job_result = json.loads(job.result)
-    print('imprimiendo')
     print(json_job_result)
-    lista_result_response.append(json_job_result)
 except ValueError as e:
     print(e)
 except TypeError as e:
     print(e)
 
-json_result = {}
-json_result['response'] = lista_result_response
-json_result_text = json.dumps(json_result, indent=4)
+# json_result = {}
+# json_result['response'] = lista_result_response
+json_result_text = json.dumps(json_job_result, indent=4)
 
-list_errors = JsonUtils.exist_errors_in_play_button_data(json_result, modo_debug)
+list_errors = JsonUtils.exist_errors_in_play_button_data(json_job_result, modo_debug)
 
 # verifica que al menos no haya algun error localizado en la lista de errores/validaciones de las vigencias y push
 # buttons, en caso contrario, se envia la notificacion por email
