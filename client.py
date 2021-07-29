@@ -50,6 +50,7 @@ if len(json_list_errors_result) > 0:
 
     print('numero de errores: {}'.format(numero_de_errores))
     HTML = HtmlUtils.generate_html_table_errors_push_buttons(json_list_errors_result)
+    print(HTML)
     subject = const.SUBJECT_MAIL_INCONSISTENCIA_PLAY_BUTTON
     resp = MailUtils.send_email(email_addresses, 'notificacion.itoc@triara.com', subject, HTML)
     print(resp.text)
