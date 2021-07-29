@@ -43,10 +43,13 @@ for job_finished in completed_jobs:
     except TypeError as e:
         pass
 
-    # verifica que al menos no haya algun error localizado en la lista de errores/validaciones de las vigencias y push
-    # buttons, en caso contrario, se envia la notificacion por email
-    if len(json_list_errors_result) > 0:
-        HTML = HtmlUtils.generate_html_table_errors_push_buttons(json_list_errors_result)
-        subject = const.SUBJECT_MAIL_INCONSISTENCIA_PLAY_BUTTON
-        resp = MailUtils.send_email(email_addresses, 'notificacion.itoc@triara.com', subject, HTML)
-        print(resp.text)
+# verifica que al menos no haya algun error localizado en la lista de errores/validaciones de las vigencias y push
+# buttons, en caso contrario, se envia la notificacion por email
+
+print(json_list_errors_result)
+
+if len(json_list_errors_result) > 0:
+    HTML = HtmlUtils.generate_html_table_errors_push_buttons(json_list_errors_result)
+    subject = const.SUBJECT_MAIL_INCONSISTENCIA_PLAY_BUTTON
+    resp = MailUtils.send_email(email_addresses, 'notificacion.itoc@triara.com', subject, HTML)
+    print(resp.text)
