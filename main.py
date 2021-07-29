@@ -85,8 +85,6 @@ def main():
 
 
 def main_with_json_param(json_arg: dict):
-    print('data received')
-
     session = requests.Session()
     group_id_list = None
     result_purchase_button_list = []

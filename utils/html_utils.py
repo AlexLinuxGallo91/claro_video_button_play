@@ -24,7 +24,7 @@ class HtmlUtils:
             expiration_date = html.escape(push_button_data['expiration_date'])
             validity = push_button_data['validity']
             group_id = push_button_data['group_id']
-            push_btn_visible = html.escape(push_button_data['push_btn_visible'])
+            push_btn_visible = push_button_data['push_btn_visible']
             message_error = html.escape(push_button_data['message_error'])
             nodo = html.escape(push_button_data['nodo'])
 
