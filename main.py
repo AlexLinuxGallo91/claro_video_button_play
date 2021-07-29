@@ -11,6 +11,12 @@ from utils.json_utils import JsonUtils
 
 
 def main_with_json_param(json_arg: dict):
+
+
+    # DEBUG
+    print('ESTOY ENTRANDO EN MODO DEBUG!!!!!!!\n\n')
+
+
     session = requests.Session()
     group_id_list = None
     result_purchase_button_list = []
@@ -55,9 +61,6 @@ def main_with_json_param(json_arg: dict):
     """
     acquired_resp_data = LoginClaroVideo.login_portal(
         script_arg_user, script_arg_password, session, authpt, hks, script_arg_region)
-
-    # DEBUG
-    print('result del login: {}'.format(acquired_resp_data))
 
     """
     Se realiza una peticion a la url de push session, este paso es necesario para poder ingresar correctamente a la 
