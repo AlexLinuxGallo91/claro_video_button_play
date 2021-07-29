@@ -1,5 +1,5 @@
 from constants import constants as const
-
+import html
 
 class HtmlUtils:
 
@@ -20,13 +20,13 @@ class HtmlUtils:
         html_headers = HtmlUtils.generate_table_headers_errors_push_buttons()
 
         for push_button_data in json_list_errors:
-            movie_serie_name = push_button_data['movie_serie_name']
-            expiration_date = push_button_data['expiration_date']
-            validity = push_button_data['validity']
-            group_id = push_button_data['group_id']
-            push_btn_visible = push_button_data['push_btn_visible']
-            message_error = push_button_data['message_error']
-            nodo = push_button_data['nodo']
+            movie_serie_name = html.escape(push_button_data['movie_serie_name'])
+            expiration_date = html.escape(push_button_data['expiration_date'])
+            validity = html.escape(push_button_data['validity'])
+            group_id = html.escape(push_button_data['group_id'])
+            push_btn_visible = html.escape(push_button_data['push_btn_visible'])
+            message_error = html.escape(push_button_data['message_error'])
+            nodo = html.escape(push_button_data['nodo'])
 
             validity = 'SI' if validity == 1 else 'NO'
             push_btn_visible = 'ACTIVO' if push_btn_visible == 1 else 'INACTIVO'
