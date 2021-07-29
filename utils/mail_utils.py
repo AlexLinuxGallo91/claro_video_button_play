@@ -1,7 +1,6 @@
-import html
 from typing import List
+
 import requests
-import cgi
 
 
 class MailUtils:
