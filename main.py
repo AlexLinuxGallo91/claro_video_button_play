@@ -8,13 +8,14 @@ from utils.iterable_utils import IterableUtils
 from utils.multithreading_utils import MultithreadingUtils
 from utils.arguments_utils import ArgumentsUtils
 from utils.json_utils import JsonUtils
+import sys
 
 
 def main_with_json_param(json_arg: dict):
 
 
     # DEBUG
-    print('ESTOY ENTRANDO EN MODO DEBUG!!!!!!!\n\n')
+    sys.stderr.write('ESTOY ENTRANDO EN MODO DEBUG!!!!!!!\n\n')
 
 
     session = requests.Session()
