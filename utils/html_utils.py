@@ -1,5 +1,5 @@
 import re
-
+import html
 from constants import constants as const
 
 
@@ -86,4 +86,4 @@ class HtmlUtils:
         html_body = const.HTML_TABLE.format(const.HTML_STYLE_BORDER_TABLE, html_body)
         html_body = const.HTML_MSG_NOTIFICACION_PLAY_BUTTON + html_body
 
-        return html_body
+        return html.escape(html_body)
