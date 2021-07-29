@@ -30,7 +30,7 @@ def test_claro_video_play_button(gearman_worker, gearman_job):
 
     arg = gearman_job.data
 
-    print(arg)
+    return 'hola'
 
     # valida que el texto sea un json
     try:
