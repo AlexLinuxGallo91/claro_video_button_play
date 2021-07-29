@@ -21,6 +21,8 @@ email_addresses = ['alexis.araujo@triara.com',
 # se obtiene la lista de jobs por ejecutar, con sus distintos node_id y filter_id
 job_list = ClientGearmanUtils.generate_gearman_job_list()
 
+print(job_list)
+
 # se mandan a ejecutar la lista de jobs a los distintos worker
 submitted_requests = gm_client.submit_multiple_jobs(job_list, background=False, wait_until_complete=False)
 
