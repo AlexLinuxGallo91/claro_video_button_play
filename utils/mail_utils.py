@@ -1,3 +1,4 @@
+import html
 from typing import List
 import requests
 import cgi
@@ -13,7 +14,7 @@ class MailUtils:
         data['from'] = p_from
         data['to'] = ','.join(lista_destinatarios)
         data['subject'] = subject
-        data['body'] = cgi.escape(body).encode('ascii', 'xmlcharrefreplace')
+        data['body'] = html.escape(body, quote=False)
 
         response = requests.post(url_api_mail, data=data)
 
