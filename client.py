@@ -32,6 +32,7 @@ modo_debug = True
 for job_finished in completed_jobs:
     try:
         result = job_finished.result
+        print(result)
         json_result = json.loads(result)
 
         if 'result' in json_result:
