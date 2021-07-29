@@ -22,7 +22,7 @@ class HtmlUtils:
         for push_button_data in json_list_errors:
             movie_serie_name = html.escape(push_button_data['movie_serie_name'])
             expiration_date = html.escape(push_button_data['expiration_date'])
-            validity = html.escape(push_button_data['validity'])
+            validity = push_button_data['validity']
             group_id = html.escape(push_button_data['group_id'])
             push_btn_visible = html.escape(push_button_data['push_btn_visible'])
             message_error = html.escape(push_button_data['message_error'])
