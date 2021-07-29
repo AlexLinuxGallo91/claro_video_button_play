@@ -38,6 +38,6 @@ class ClientGearmanUtils:
                 elif key == 'filter_id':
                     new_args['filter_id'] = id
 
-                job_list.append(dict(task="test_claro_video_play_button", data=json.dumps(new_args)))
+                job_list.append(dict(task="test_claro_video_play_button_2", data=json.dumps(new_args)))
 
         return job_list
