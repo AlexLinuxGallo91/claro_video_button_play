@@ -32,7 +32,6 @@ modo_debug = True
 for job_finished in completed_jobs:
     try:
         result = job_finished.result
-        print(result)
         json_result = json.loads(result)
 
         if 'result' in json_result:
@@ -50,3 +49,4 @@ if len(json_list_errors_result) > 0:
     HTML = HtmlUtils.generate_html_table_errors_push_buttons(json_list_errors_result)
     subject = const.SUBJECT_MAIL_INCONSISTENCIA_PLAY_BUTTON
     resp = MailUtils.send_email(email_addresses, 'notificacion.itoc@triara.com', subject, HTML)
+    print(resp.text)
