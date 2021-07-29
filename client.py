@@ -41,7 +41,7 @@ for job_finished in completed_jobs:
 
     except ValueError:
         pass
-    except TypeError as e:
+    except TypeError:
         pass
 
 # verifica que al menos no haya algun error localizado en la lista de errores/validaciones de las vigencias y push
