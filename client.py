@@ -36,7 +36,8 @@ for job_finished in completed_jobs:
         json_result = json.loads(result)
 
         if 'result' in json_result:
-            json_list_errors_result.append(JsonUtils.exist_errors_in_play_button_data(json_result, modo_debug))
+            list_errors_obtained = JsonUtils.exist_errors_in_play_button_data(json_result, modo_debug)
+            json_list_errors_result.extend(list_errors_obtained)
 
     except ValueError:
         pass
