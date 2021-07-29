@@ -1,6 +1,6 @@
-from constants import constants as const
-import html
 import re
+
+from constants import constants as const
 
 
 class HtmlUtils:
