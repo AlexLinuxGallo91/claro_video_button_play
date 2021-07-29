@@ -1,47 +1,52 @@
 import json
 
 from python3_gearman import GearmanClient
-import sys
-from utils.html_utils import HtmlUtils
+
+import constants.constants as const
 from utils.client_gearman_utils import ClientGearmanUtils
+from utils.html_utils import HtmlUtils
 from utils.json_utils import JsonUtils
 from utils.mail_utils import MailUtils
-import constants.constants as const
 
-gm_client = GearmanClient(['localhost:4770'])
+gm_client = GearmanClient(['localhost:4771'])
 
-lista_correos_destinatarios = ['alexis.araujo@triara.com',
-                               'jose.hernandez@triara.com',
-                               'gerardo.trevino@triara.com'
-                               ]
+json_list_errors_result = []
 
-# se cargan o mandan los jobs al worker
-data = ClientGearmanUtils.set_job_data_dict()
-job = gm_client.submit_job(task='test_claro_video_play_button', data=data,
-                           background=False, wait_until_complete=True, poll_timeout=300.0)
+# lista de destinatarios a enviar las notificaciones
+email_addresses = ['alexis.araujo@triara.com',
+                   'jose.hernandez@triara.com',
+                   'gerardo.trevino@triara.com'
+                   ]
+
+# se obtiene la lista de jobs por ejecutar, con sus distintos node_id y filter_id
+job_list = ClientGearmanUtils.generate_gearman_job_list()
+
+# se mandan a ejecutar la lista de jobs a los distintos worker
+submitted_requests = gm_client.submit_multiple_jobs(job_list, background=False, wait_until_complete=False)
+
+# se espera a que todos los jobs se hayan finalizado, en caso de que un job sobrepase 300 segundos, se omite
+completed_jobs = gm_client.wait_until_jobs_completed(submitted_requests, poll_timeout=300)
 
 # bandera para debug
 modo_debug = True
 
-try:
-    json_result = json.loads(job.result)
-except ValueError as e:
-    print(e)
-    sys.exit(1)
-except TypeError as e:
-    print(e)
-    sys.exit(1)
+for job_finished in completed_jobs:
+    try:
+        result = job_finished.result
+        json_result = json.load(result)
 
-if 'hubo_error' in json_result:
-    print(json.dumps(json_result, indent=4, sort_keys=True))
-    sys.exit(1)
-elif 'result' in json_result:
-    list_errors = JsonUtils.exist_errors_in_play_button_data(json_result, modo_debug)
+        if 'result' in json_result:
+            json_list_errors_result.append(JsonUtils.exist_errors_in_play_button_data(json_result, modo_debug))
+
+    except ValueError:
+        pass
+    except TypeError as e:
+        pass
 
     # verifica que al menos no haya algun error localizado en la lista de errores/validaciones de las vigencias y push
     # buttons, en caso contrario, se envia la notificacion por email
-    if len(list_errors) > 0:
-        HTML = HtmlUtils.generate_html_table_errors_push_buttons(list_errors)
+    if len(json_list_errors_result) > 0:
+        HTML = HtmlUtils.generate_html_table_errors_push_buttons(json_list_errors_result)
         subject = const.SUBJECT_MAIL_INCONSISTENCIA_PLAY_BUTTON
-        resp = MailUtils.send_email(lista_correos_destinatarios, 'notificacion.itoc@triara.com', subject, HTML)
+        resp = MailUtils.send_email(email_addresses, 'notificacion.itoc@triara.com', subject, HTML)
         print(resp.text)

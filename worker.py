@@ -16,7 +16,7 @@ from main import main_with_json_param
 # se define el worker, host y puerto al que estara a la escucha de cada peticion
 # para realizar un nuevo Job
 host = '127.0.0.1'
-puerto = '4770'
+puerto = '4771'
 worker = GearmanWorker(['{}:{}'.format(host, puerto)])
 
 
