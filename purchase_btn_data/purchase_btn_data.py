@@ -90,9 +90,6 @@ class PurchaseBtnData:
             resp = session.get(url_req).content
             json_resp = json.loads(resp)
 
-            # DEBUG
-            print(json_resp)
-
             date_info_expiration = PurchaseBtnData.get_expired_date_info(group_id, session)
             btn_purchase_info = json_resp['response']['playButton']
 

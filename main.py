@@ -56,6 +56,9 @@ def main_with_json_param(json_arg: dict):
     acquired_resp_data = LoginClaroVideo.login_portal(
         script_arg_user, script_arg_password, session, authpt, hks, script_arg_region)
 
+    # DEBUG
+    print(acquired_resp_data)
+
     """
     Se realiza una peticion a la url de push session, este paso es necesario para poder ingresar correctamente a la 
     plataforma y tener acceso a la informacion de los play button en la peticiones web posteriores
