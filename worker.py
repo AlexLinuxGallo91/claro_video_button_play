@@ -75,5 +75,5 @@ def test_claro_video_play_button(gearman_worker, gearman_job):
     # return response
 
 
-worker.register_task('test_claro_video_play_button', test_claro_video_play_button)
+worker.register_task('test_claro_video_play_button_2', test_claro_video_play_button)
 worker.work()
