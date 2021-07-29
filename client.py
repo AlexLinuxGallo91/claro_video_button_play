@@ -15,8 +15,7 @@ json_list_errors_result = []
 # lista de destinatarios a enviar las notificaciones
 email_addresses = ['alexis.araujo@triara.com',
                    'jose.hernandez@triara.com',
-                   'gerardo.trevino@triara.com'
-                   ]
+                   'gerardo.trevino@triara.com']
 
 # se obtiene la lista de jobs por ejecutar, con sus distintos node_id y filter_id
 job_list = ClientGearmanUtils.generate_gearman_job_list()
@@ -44,13 +43,15 @@ for job_finished in completed_jobs:
     except TypeError as e:
         pass
 
-print('final result\n\n')
-print(json_list_errors_result)
-
 # verifica que al menos no haya algun error localizado en la lista de errores/validaciones de las vigencias y push
 # buttons, en caso contrario, se envia la notificacion por email
-# if len(json_list_errors_result) > 0:
-#     HTML = HtmlUtils.generate_html_table_errors_push_buttons(json_list_errors_result)
-#     subject = const.SUBJECT_MAIL_INCONSISTENCIA_PLAY_BUTTON
-#     resp = MailUtils.send_email(email_addresses, 'notificacion.itoc@triara.com', subject, HTML)
-#     print(resp.text)
+if len(json_list_errors_result) > 0:
+    HTML = HtmlUtils.generate_html_table_errors_push_buttons(json_list_errors_result)
+    subject = const.SUBJECT_MAIL_INCONSISTENCIA_PLAY_BUTTON
+
+    print('HTML: {}\n\n'.format(HTML))
+    print('subject: {}'.format(subject))
+
+
+    # resp = MailUtils.send_email(email_addresses, 'notificacion.itoc@triara.com', subject, HTML)
+    # print(resp.text)
