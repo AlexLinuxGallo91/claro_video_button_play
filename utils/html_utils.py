@@ -21,6 +21,8 @@ class HtmlUtils:
 
         for push_button_data in json_list_errors:
 
+            print(type(push_button_data))
+
             movie_serie_name = push_button_data['movie_serie_name']
             expiration_date = push_button_data['expiration_date']
             validity = push_button_data['validity']
