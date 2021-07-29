@@ -30,6 +30,8 @@ def test_claro_video_play_button(gearman_worker, gearman_job):
 
     arg = gearman_job.data
 
+    print(arg)
+
     # valida que el texto sea un json
     try:
         json_arg = json.loads(arg)
