@@ -13,7 +13,7 @@ class MailUtils:
         data['from'] = p_from
         data['to'] = ','.join(lista_destinatarios)
         data['subject'] = subject
-        data['body'] = html.escape(body)
+        data['body'] = body
 
         response = requests.post(url_api_mail, data=data)
 
