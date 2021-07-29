@@ -35,16 +35,17 @@ for job_finished in completed_jobs:
         result = job_finished.result
         json_result = json.loads(result)
 
-        print(json_result)
-
-        # if 'result' in json_result:
-        #     list_errors_obtained = JsonUtils.exist_errors_in_play_button_data(json_result, modo_debug)
-        #     json_list_errors_result.extend(list_errors_obtained)
+        if 'result' in json_result:
+            list_errors_obtained = JsonUtils.exist_errors_in_play_button_data(json_result, modo_debug)
+            json_list_errors_result.extend(list_errors_obtained)
 
     except ValueError:
         pass
     except TypeError as e:
         pass
+
+print('final result\n\n')
+print(json_list_errors_result)
 
 # verifica que al menos no haya algun error localizado en la lista de errores/validaciones de las vigencias y push
 # buttons, en caso contrario, se envia la notificacion por email
