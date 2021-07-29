@@ -27,7 +27,7 @@ print(job_list)
 submitted_requests = gm_client.submit_multiple_jobs(job_list, background=False, wait_until_complete=False)
 
 # se espera a que todos los jobs se hayan finalizado, en caso de que un job sobrepase 300 segundos, se omite
-completed_jobs = gm_client.wait_until_jobs_completed(submitted_requests, poll_timeout=300)
+completed_jobs = gm_client.wait_until_jobs_completed(submitted_requests, poll_timeout=800)
 
 # bandera para debug
 modo_debug = True
