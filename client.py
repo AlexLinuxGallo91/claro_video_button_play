@@ -52,6 +52,6 @@ if len(json_list_errors_result) > 0:
     print('HTML: {}\n\n'.format(HTML))
     print('subject: {}'.format(subject))
 
-
-    # resp = MailUtils.send_email(email_addresses, 'notificacion.itoc@triara.com', subject, HTML)
-    # print(resp.text)
+    resp = MailUtils.send_email(email_addresses, 'notificacion.itoc@triara.com', subject, HTML)
+    print('\n\n')
+    print(resp.text)

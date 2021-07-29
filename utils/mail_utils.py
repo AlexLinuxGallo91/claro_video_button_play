@@ -1,5 +1,6 @@
 from typing import List
 import requests
+import html
 
 
 class MailUtils:
@@ -12,7 +13,7 @@ class MailUtils:
         data['from'] = p_from
         data['to'] = ','.join(lista_destinatarios)
         data['subject'] = subject
-        data['body'] = body
+        data['body'] = html.escape(body)
 
         response = requests.post(url_api_mail, data=data)
 
