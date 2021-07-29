@@ -15,7 +15,7 @@ def main_with_json_param(json_arg: dict):
 
 
     # DEBUG
-    sys.stderr.write('ESTOY ENTRANDO EN MODO DEBUG!!!!!!!\n\n')
+    print('ESTOY ENTRANDO EN MODO DEBUG!!!!!!!\n\n')
 
 
     session = requests.Session()
