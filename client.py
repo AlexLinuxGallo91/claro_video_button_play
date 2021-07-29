@@ -21,8 +21,6 @@ email_addresses = ['alexis.araujo@triara.com',
 # se obtiene la lista de jobs por ejecutar, con sus distintos node_id y filter_id
 job_list = ClientGearmanUtils.generate_gearman_job_list()
 
-print(job_list)
-
 # se mandan a ejecutar la lista de jobs a los distintos worker
 submitted_requests = gm_client.submit_multiple_jobs(job_list, background=False, wait_until_complete=False)
 
@@ -47,9 +45,6 @@ for job_finished in completed_jobs:
 
 # verifica que al menos no haya algun error localizado en la lista de errores/validaciones de las vigencias y push
 # buttons, en caso contrario, se envia la notificacion por email
-
-print(json_list_errors_result)
-
 if len(json_list_errors_result) > 0:
     HTML = HtmlUtils.generate_html_table_errors_push_buttons(json_list_errors_result)
     subject = const.SUBJECT_MAIL_INCONSISTENCIA_PLAY_BUTTON
