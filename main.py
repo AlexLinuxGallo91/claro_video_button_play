@@ -57,7 +57,7 @@ def main_with_json_param(json_arg: dict):
         script_arg_user, script_arg_password, session, authpt, hks, script_arg_region)
 
     # DEBUG
-    print(acquired_resp_data)
+    print('result del login: {}'.format(acquired_resp_data))
 
     """
     Se realiza una peticion a la url de push session, este paso es necesario para poder ingresar correctamente a la 
