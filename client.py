@@ -33,7 +33,7 @@ modo_debug = True
 for job_finished in completed_jobs:
     try:
         result = job_finished.result
-        json_result = json.load(result)
+        json_result = json.loads(result)
 
         if 'result' in json_result:
             json_list_errors_result.append(JsonUtils.exist_errors_in_play_button_data(json_result, modo_debug))
