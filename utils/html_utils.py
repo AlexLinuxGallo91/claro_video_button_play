@@ -2,11 +2,44 @@ from constants import constants as const
 import html
 import re
 
+
 class HtmlUtils:
 
     @staticmethod
     def replace_special_char_in_String_with_space(text):
-        return re.sub('[^a-zA-Z0-9 \n\.]', '', text)
+
+        text_without_accents = ''
+
+        for char in text:
+
+            if char == 'á':
+                text_without_accents = text_without_accents + 'a'
+            elif char == 'Á':
+                text_without_accents = text_without_accents + 'A'
+            if char == 'é':
+                text_without_accents = text_without_accents + 'e'
+            elif char == 'É':
+                text_without_accents = text_without_accents + 'E'
+            if char == 'í':
+                text_without_accents = text_without_accents + 'i'
+            elif char == 'Í':
+                text_without_accents = text_without_accents + 'I'
+            if char == 'ó':
+                text_without_accents = text_without_accents + 'o'
+            elif char == 'Ó':
+                text_without_accents = text_without_accents + 'O'
+            if char == 'ú':
+                text_without_accents = text_without_accents + 'u'
+            elif char == 'Ú':
+                text_without_accents = text_without_accents + 'U'
+            elif char == 'ñ':
+                text_without_accents = text_without_accents + 'n'
+            elif char == 'Ñ':
+                text_without_accents = text_without_accents + 'N'
+            else:
+                text_without_accents = text_without_accents + char
+
+        return re.sub('[^a-zA-Z0-9 \n\.]', '', text_without_accents)
 
     @staticmethod
     def generate_table_headers_errors_push_buttons():
