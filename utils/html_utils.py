@@ -1,5 +1,3 @@
-import time
-
 from constants import constants as const
 
 
@@ -22,11 +20,6 @@ class HtmlUtils:
         html_headers = HtmlUtils.generate_table_headers_errors_push_buttons()
 
         for push_button_data in json_list_errors:
-
-            print(push_button_data)
-            time.sleep(10)
-
-
             movie_serie_name = push_button_data['movie_serie_name']
             expiration_date = push_button_data['expiration_date']
             validity = push_button_data['validity']
