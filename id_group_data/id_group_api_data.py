@@ -81,6 +81,10 @@ class IdGroupApi:
         url = 'https://mfwkweb-api.clarovideo.net/services/content/list'
         # Consultar get request.
         response = requests.get(url, params=jsonParams)
+
+        # DEBUG
+        print('DEBUG!!!!!!!!: {}'.format(response))
+
         # Se extrae el total de registros del response.
         responseJson = response.json()
         totalIdgrups = responseJson['response']['total']
