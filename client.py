@@ -32,7 +32,7 @@ job_list = ClientGearmanUtils.generate_gearman_job_list()
 # bandera para debug
 modo_debug = True
 
-print('entrando')
+
 
 for job_task_arg in job_list:
     submitted_job = gm_client.submit_job(job_task_arg['task'], job_task_arg['data'], poll_timeout=180)
@@ -45,10 +45,12 @@ for job_task_arg in job_list:
             list_errors_obtained = JsonUtils.exist_errors_in_play_button_data(json_result, modo_debug)
             json_list_errors_result.extend(list_errors_obtained)
 
-    except ValueError:
-        pass
-    except TypeError:
-        pass
+    except ValueError as e:
+        print(e)
+        print('result: {}'.format(text_result_job))
+    except TypeError as e:
+        print(e)
+        print('result: {}'.format(text_result_job))
 
 
 #
