@@ -38,7 +38,7 @@ for job_task_arg in job_list:
     print(json_args)
 
     print('nodo en revision: {}'.format(
-        JsonUtils.verify_node_by_filter_and_node_id(json_args['node_id'], json_args['filter_id'])))
+        JsonUtils.verify_node_by_filter_and_node_id(int(json_args['node_id']), int(json_args['filter_id']))))
 
     submitted_job = gm_client.submit_job(job_task_arg['task'], job_task_arg['data'], poll_timeout=180)
     text_result_job = submitted_job.result
