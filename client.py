@@ -7,6 +7,9 @@ from utils.client_gearman_utils import ClientGearmanUtils
 from utils.html_utils import HtmlUtils
 from utils.json_utils import JsonUtils
 from utils.mail_utils import MailUtils
+import time
+
+tiempo_de_inicio = time.time()
 
 gm_client = GearmanClient(['localhost:4771'])
 
@@ -72,3 +75,5 @@ if len(json_list_errors_result) > 0:
     subject = const.SUBJECT_MAIL_INCONSISTENCIA_PLAY_BUTTON
     resp = MailUtils.send_email(email_addresses, 'notificacion.itoc@triara.com', subject, HTML)
     print(resp.text)
+
+print('tiempo total de finalizacion de ejecucion del script: {}'.format(time.time() - tiempo_de_inicio))
