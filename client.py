@@ -32,8 +32,10 @@ job_list = ClientGearmanUtils.generate_gearman_job_list()
 # bandera para debug
 modo_debug = True
 
+print('entrando')
+
 for job_task_arg in job_list:
-    submitted_job = gm_client.submit_job(job_task_arg['task'], job_task_arg['data'], poll_timeout=300)
+    submitted_job = gm_client.submit_job(job_task_arg['task'], job_task_arg['data'], poll_timeout=180)
     text_result_job = submitted_job.result
 
     try:
