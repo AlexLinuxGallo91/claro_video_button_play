@@ -81,6 +81,10 @@ class JsonUtils:
         # debug
         nodo = ''
         if 'result' in json_result:
+
+            if len(json_result['result'] < 1):
+                print('no se encontraron id_groups en este nodo :(')
+
             for data_json_serie in json_result['result']:
 
                 json_data_expiration = {}
