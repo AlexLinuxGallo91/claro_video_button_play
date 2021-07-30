@@ -34,11 +34,10 @@ modo_debug = True
 
 for job_task_arg in job_list:
 
-    print(type(job_task_arg['data']))
-    print(job_task_arg['data'])
+    json_args = json.load(job_task_arg['data'])
 
-    print('nodo en revision: {}'.format(JsonUtils.verify_node_by_filter_and_node_id(job_task_arg['data']['node_id'],
-                                                                                    job_task_arg['data']['filter_id'])))
+    print('nodo en revision: {}'.format(
+        JsonUtils.verify_node_by_filter_and_node_id(json_args['node_id'], json_args['filter_id'])))
 
     submitted_job = gm_client.submit_job(job_task_arg['task'], job_task_arg['data'], poll_timeout=180)
     text_result_job = submitted_job.result
