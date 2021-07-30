@@ -34,7 +34,7 @@ modo_debug = True
 
 for job_task_arg in job_list:
 
-    json_args = json.load(job_task_arg['data'])
+    json_args = json.loads(job_task_arg['data'])
 
     print('nodo en revision: {}'.format(
         JsonUtils.verify_node_by_filter_and_node_id(json_args['node_id'], json_args['filter_id'])))
