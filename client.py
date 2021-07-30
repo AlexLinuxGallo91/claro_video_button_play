@@ -31,7 +31,20 @@ modo_debug = True
 
 for job_task_arg in job_list:
     submitted_job = gm_client.submit_job(job_task_arg['task'], job_task_arg['data'], poll_timeout=300)
-    print('resultado del nodo:\n\n{}'.format(submitted_job.result))
+    text_result_job = submitted_job.result
+
+    try:
+        json_result = json.loads(text_result_job)
+
+        if 'result' in json_result:
+            list_errors_obtained = JsonUtils.exist_errors_in_play_button_data(json_result, modo_debug)
+            json_list_errors_result.extend(list_errors_obtained)
+
+    except ValueError:
+        pass
+    except TypeError:
+        pass
+
 
 #
 # for job_finished in completed_jobs:

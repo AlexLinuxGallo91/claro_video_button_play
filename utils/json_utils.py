@@ -78,6 +78,8 @@ class JsonUtils:
     def exist_errors_in_play_button_data(json_result: dict, debug_mode: bool = False):
         error_list = []
 
+        # debug
+        nodo = ''
         if 'result' in json_result:
             for data_json_serie in json_result['result']:
 
@@ -88,6 +90,7 @@ class JsonUtils:
                 json_data_expiration['group_id'] = data_json_serie['date_info_expiration']['group_id']
                 json_data_expiration['push_btn_visible'] = int(data_json_serie['playButton']['visible'])
                 json_data_expiration['nodo'] = data_json_serie['nodo']
+                nodo = json_data_expiration['nodo']
 
                 if debug_mode:
                     list_random_values = [0, 1]
@@ -111,5 +114,8 @@ class JsonUtils:
                 elif json_data_expiration['push_btn_visible'] == 0 and json_data_expiration['validity'] == 0:
                     json_data_expiration['message_error'] = 'El contenido no deberia estar publicado'
                     error_list.append(json_data_expiration)
+
+            # debug
+            print('numero de elementos encontrados en el nodo {}: {}'.format(nodo, len(json_result['result'])))
 
         return error_list
