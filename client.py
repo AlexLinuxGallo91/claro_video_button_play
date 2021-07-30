@@ -20,29 +20,34 @@ email_addresses = ['alexis.araujo@triara.com',
 # se obtiene la lista de jobs por ejecutar, con sus distintos node_id y filter_id
 job_list = ClientGearmanUtils.generate_gearman_job_list()
 
-# se mandan a ejecutar la lista de jobs a los distintos worker
-submitted_requests = gm_client.submit_multiple_jobs(job_list, background=False, wait_until_complete=False)
-
-# se espera a que todos los jobs se hayan finalizado, en caso de que un job sobrepase 300 segundos, se omite
-completed_jobs = gm_client.wait_until_jobs_completed(submitted_requests, poll_timeout=300)
+# # se mandan a ejecutar la lista de jobs a los distintos worker
+# submitted_requests = gm_client.submit_multiple_jobs(job_list, background=False, wait_until_complete=False)
+#
+# # se espera a que todos los jobs se hayan finalizado, en caso de que un job sobrepase 300 segundos, se omite
+# completed_jobs = gm_client.wait_until_jobs_completed(submitted_requests, poll_timeout=300)
 
 # bandera para debug
 modo_debug = True
 
-for job_finished in completed_jobs:
-    try:
-        result = job_finished.result
-        print(result)
-        json_result = json.loads(result)
+for job_task_arg in job_list:
+    submitted_job = gm_client.submit_job(job_task_arg['task'], job_task_arg['data'], poll_timeout=300)
+    print('resultado del nodo:\n\n{}'.format(submitted_job.result))
 
-        if 'result' in json_result:
-            list_errors_obtained = JsonUtils.exist_errors_in_play_button_data(json_result, modo_debug)
-            json_list_errors_result.extend(list_errors_obtained)
-
-    except ValueError:
-        pass
-    except TypeError:
-        pass
+#
+# for job_finished in completed_jobs:
+#     try:
+#         result = job_finished.result
+#         print(result)
+#         json_result = json.loads(result)
+#
+#         if 'result' in json_result:
+#             list_errors_obtained = JsonUtils.exist_errors_in_play_button_data(json_result, modo_debug)
+#             json_list_errors_result.extend(list_errors_obtained)
+#
+#     except ValueError:
+#         pass
+#     except TypeError:
+#         pass
 
 # verifica que al menos no haya algun error localizado en la lista de errores/validaciones de las vigencias y push
 # buttons, en caso contrario, se envia la notificacion por email
