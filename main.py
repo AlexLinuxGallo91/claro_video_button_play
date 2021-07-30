@@ -88,7 +88,7 @@ def main_with_json_param(json_arg: dict):
     se itera por grupos/pedazos de 49 ids y se realiza las peticiones de manera paralela para obtener la informacion
     del play button y la fecha de vigencia.
     """
-    for chunk_id in IterableUtils.chunker(group_id_list, 49):
+    for chunk_id in IterableUtils.chunker(group_id_list, 40):
         result_purchase_button_list.extend(
             MultithreadingUtils.process_data_id_group_requests(
                 chunk_id, session, acquired_resp_data, json_arg['region'], nodo_obtained))
