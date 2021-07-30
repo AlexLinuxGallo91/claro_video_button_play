@@ -16,6 +16,8 @@
 #############################################################################################################################
 
 # import requests module.
+import time
+
 import requests
 import json
 import concurrent.futures as futures
@@ -120,6 +122,10 @@ class IdGroupApi:
     def getIdgrups(self, url, jsonParams, fromPart):
         jsonParams['from'] = (fromPart - 1)
         # print(jsonParams)
+
+        #debug
+        time.sleep(1)
+
         response = requests.get(url, params=jsonParams)
         # Validar que el codigo de respuesta sea 200.
         if (response.ok):
