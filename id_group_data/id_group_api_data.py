@@ -84,7 +84,7 @@ class IdGroupApi:
 
         # DEBUG
         print('DEBUG!!!!!!!!: {}'.format(response))
-        print('json_response: {}'.format(response.json()))
+        print('json_response: {}'.format(response.text))
 
         # Se extrae el total de registros del response.
         responseJson = response.json()
