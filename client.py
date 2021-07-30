@@ -32,9 +32,11 @@ job_list = ClientGearmanUtils.generate_gearman_job_list()
 # bandera para debug
 modo_debug = True
 
-
-
 for job_task_arg in job_list:
+
+    print('nodo en revision: {}'.format(JsonUtils.verify_node_by_filter_and_node_id(job_task_arg['data']['node_id'],
+                                                                                    job_task_arg['data']['filter_id'])))
+
     submitted_job = gm_client.submit_job(job_task_arg['task'], job_task_arg['data'], poll_timeout=180)
     text_result_job = submitted_job.result
 
@@ -51,7 +53,6 @@ for job_task_arg in job_list:
     except TypeError as e:
         print(e)
         print('result: {}'.format(text_result_job))
-
 
 #
 # for job_finished in completed_jobs:
