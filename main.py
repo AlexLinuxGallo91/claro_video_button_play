@@ -43,17 +43,29 @@ def main_with_json_param(json_arg: dict):
     """
     Se realiza la obtencion de la lista de IdGroup de cada una de las series por la region, filter_id y node_id definidos
     """
+    print('apunto de obtener los id_group')
     id_group_json = IdGroupApi().main(script_arg_node_id, script_arg_filter_id, script_arg_region)
+
+    print('id_group obtenidos: {}'.format(id_group_json))
+
     group_id_list = id_group_json['idgrups']
+
+    print('id_group list: {}'.format(group_id_list))
 
     """
     Se genera la llave hks con un string alfanumerico aleatorio de 26 caracteres
     """
     hks = LoginClaroVideo.generate_hks()
+
+    # DEBUG
+    print('hks obtenido: {}'.format(hks))
+
     """
     Se obtiene la llave authpt por medio de webscrapping de la pagina principal de claro video
     """
     authpt = LoginClaroVideo.get_authpt(session)
+    # DEBUG
+    print('authpt obtenido: {}'.format(authpt))
 
     # acquired_resp_data = LoginClaroVideo.get_starter_header_info(authpt, hks, session)
     """
