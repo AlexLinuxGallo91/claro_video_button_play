@@ -11,7 +11,7 @@ import time
 
 tiempo_de_inicio = time.time()
 
-gm_client = GearmanClient(['localhost:4730'])
+gm_client = GearmanClient(['localhost:4771'])
 
 json_list_errors_result = []
 
