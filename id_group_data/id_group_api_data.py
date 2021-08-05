@@ -33,11 +33,6 @@ class IdGroupApi:
     def main(self, node_id, filter_id, region):
         # Datos iniciales de l aurl
 
-        #DEBUG
-        print('node_id: {}'.format(node_id))
-        print('filter_id: {}'.format(filter_id))
-        print('region: {}'.format(region))
-
         idgrups = self.jsonidgrup(self.getParams(node_id, filter_id, region))
         # dict_json = json.dumps(idgrups, indent = 4)
         # print(dict_json)
@@ -83,10 +78,6 @@ class IdGroupApi:
         url = 'https://mfwkweb-api.clarovideo.net/services/content/list'
         # Consultar get request.
         response = requests.get(url, params=jsonParams)
-
-        # DEBUG
-        print('DEBUG!!!!!!!!: {}'.format(response))
-        print('json_response: {}'.format(response.text))
 
         # Se extrae el total de registros del response.
         responseJson = response.json()

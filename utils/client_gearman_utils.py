@@ -1,6 +1,6 @@
 import copy
 import json
-
+from constants import constants as const
 
 class ClientGearmanUtils:
 
@@ -16,28 +16,12 @@ class ClientGearmanUtils:
             "node_id": ""
         }
 
-        id_dict = {
-            'node_id': ['102741',
-                        '102738',
-                        '102737',
-                        '102687',
-                        '102686'
-                        ],
-            'filter_id': [
-                '9482', '31049', '31069', '36125', '36217', '38146', '38466', '38485', '38488', '38489',
-                          '38503', '38504', '38539', '38540', '39522', '39581', '39597'
-            ]
-        }
+        for item in const.DICT_NODOS:
+            new_args = copy.deepcopy(param_dict)
+            new_args['node_name'] = item['node_name']
+            new_args['node_id'] = item['node_id']
+            new_args['filter_id'] = item['filter_id']
 
-        for key, value in id_dict.items():
-            for id in value:
-                new_args = copy.deepcopy(param_dict)
-
-                if key == 'node_id':
-                    new_args['node_id'] = id
-                elif key == 'filter_id':
-                    new_args['filter_id'] = id
-
-                job_list.append(dict(task="test_claro_video_play_button_3", data=json.dumps(new_args)))
+            job_list.append(dict(task="test_claro_video_play_button", data=json.dumps(new_args)))
 
         return job_list

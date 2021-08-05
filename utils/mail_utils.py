@@ -14,7 +14,7 @@ class MailUtils:
         data['to'] = ','.join(lista_destinatarios)
         data['subject'] = subject
         data['body'] = body
-
+        print('enviando correo de notificacion')
         response = requests.post(url_api_mail, data=data)
-
+        print(response)
         return response

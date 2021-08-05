@@ -11,7 +11,7 @@ import time
 
 tiempo_de_inicio = time.time()
 
-gm_client = GearmanClient(['localhost:4771'])
+gm_client = GearmanClient(['localhost:4730'])
 
 json_list_errors_result = []
 
@@ -22,6 +22,7 @@ email_addresses = ['alexis.araujo@triara.com',
 
 # se obtiene la lista de jobs por ejecutar, con sus distintos node_id y filter_id
 job_list = ClientGearmanUtils.generate_gearman_job_list()
+region = ''
 
 # # se mandan a ejecutar la lista de jobs a los distintos worker
 # submitted_requests = gm_client.submit_multiple_jobs(job_list, background=False, wait_until_complete=False)
@@ -33,14 +34,11 @@ job_list = ClientGearmanUtils.generate_gearman_job_list()
 modo_debug = True
 
 for job_task_arg in job_list:
-
     json_args = json.loads(job_task_arg['data'])
-    print(json_args)
+    region = json_args['region']
+    print('nodo en revision: {} de la region {}'.format(json_args['node_name'], region))
 
-    print('nodo en revision: {}'.format(
-        JsonUtils.verify_node_by_filter_and_node_id(str(json_args['node_id']), str(json_args['filter_id']))))
-
-    submitted_job = gm_client.submit_job(job_task_arg['task'], job_task_arg['data'], poll_timeout=180)
+    submitted_job = gm_client.submit_job(job_task_arg['task'], job_task_arg['data'], poll_timeout=480)
     text_result_job = submitted_job.result
 
     try:
@@ -51,36 +49,24 @@ for job_task_arg in job_list:
             json_list_errors_result.extend(list_errors_obtained)
 
     except ValueError as e:
-        print(e)
-        print('result: {}'.format(text_result_job))
+        print('Sucedio un error ValueError al momento de convertir el resultado string del job a json: {}.\n '
+              'resultado obtenido: {}'.format(e, text_result_job))
     except TypeError as e:
-        print(e)
-        print('result: {}'.format(text_result_job))
+        print('Sucedio un error TypeError al momento de convertir el resultado string del job a json: {}.\n '
+              'resultado obtenido: {}'.format(e, text_result_job))
 
-#
-# for job_finished in completed_jobs:
-#     try:
-#         result = job_finished.result
-#         print(result)
-#         json_result = json.loads(result)
-#
-#         if 'result' in json_result:
-#             list_errors_obtained = JsonUtils.exist_errors_in_play_button_data(json_result, modo_debug)
-#             json_list_errors_result.extend(list_errors_obtained)
-#
-#     except ValueError:
-#         pass
-#     except TypeError:
-#         pass
+print('\nnumero total de errores obtenidos: {}'.format(len(json_list_errors_result)))
+
+while len(json_list_errors_result) >= 150:
+    del json_list_errors_result[-1]
+
+print('Numero de errores a enviar por medio del debug (se redujo a un numero menor): {}'.format(len(json_list_errors_result)))
 
 # verifica que al menos no haya algun error localizado en la lista de errores/validaciones de las vigencias y push
 # buttons, en caso contrario, se envia la notificacion por email
 if len(json_list_errors_result) > 0:
-    numero_de_errores = len(json_list_errors_result)
-
-    print('numero de errores: {}'.format(numero_de_errores))
     HTML = HtmlUtils.generate_html_table_errors_push_buttons(json_list_errors_result)
-    subject = const.SUBJECT_MAIL_INCONSISTENCIA_PLAY_BUTTON
+    subject = HtmlUtils.generate_subject_email_by_list_play_button_errors(json_list_errors_result, region)
     resp = MailUtils.send_email(email_addresses, 'notificacion.itoc@triara.com', subject, HTML)
     print(resp.text)
 

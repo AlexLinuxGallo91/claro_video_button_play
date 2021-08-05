@@ -29,7 +29,6 @@ def test_claro_video_play_button(gearman_worker, gearman_job):
     }
 
     arg = gearman_job.data
-
     # valida que el texto sea un json
     try:
         json_arg = json.loads(arg)
@@ -74,5 +73,5 @@ def test_claro_video_play_button(gearman_worker, gearman_job):
     return response
 
 
-worker.register_task('test_claro_video_play_button_3', test_claro_video_play_button)
+worker.register_task('test_claro_video_play_button', test_claro_video_play_button)
 worker.work()

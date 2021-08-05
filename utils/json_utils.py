@@ -96,7 +96,7 @@ class JsonUtils:
                 json_data_expiration['nodo'] = data_json_serie['nodo']
                 nodo = json_data_expiration['nodo']
 
-                if debug_mode:
+                if debug_mode and len(error_list) <= 5:
                     list_random_values = [0, 1]
                     dummy_bool_visibility = random.choice(list_random_values)
                     dummy_bool_validity = random.choice(list_random_values)

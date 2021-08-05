@@ -12,11 +12,8 @@ import sys
 
 
 def main_with_json_param(json_arg: dict):
-
-
     # DEBUG
-    print('ESTOY ENTRANDO EN MODO DEBUG!!!!!!!\n\n')
-
+    print('MODO DEBUG!!!\n')
 
     session = requests.Session()
     group_id_list = None
@@ -34,23 +31,17 @@ def main_with_json_param(json_arg: dict):
     """
     se obtiene el nodo por medio del filter id y el node id
     """
-    nodo_obtained = JsonUtils.verify_node_by_filter_and_node_id(
-        ArgumentsUtils.convert_string_to_int(script_arg_node_id),
-        ArgumentsUtils.convert_string_to_int(script_arg_filter_id)
-    )
+    nodo_obtained = json_arg['node_name']
 
     print('nodo obtenido: {}'.format(nodo_obtained))
     """
     Se realiza la obtencion de la lista de IdGroup de cada una de las series por la region, filter_id y node_id definidos
     """
-    print('apunto de obtener los id_group')
     id_group_json = IdGroupApi().main(script_arg_node_id, script_arg_filter_id, script_arg_region)
-
-    print('id_group obtenidos: {}'.format(id_group_json))
 
     group_id_list = id_group_json['idgrups']
 
-    print('id_group list: {}'.format(group_id_list))
+    print('id groups obtenidos: {}'.format(len(group_id_list)))
 
     """
     Se genera la llave hks con un string alfanumerico aleatorio de 26 caracteres
@@ -65,7 +56,6 @@ def main_with_json_param(json_arg: dict):
     """
     authpt = LoginClaroVideo.get_authpt(session)
     # DEBUG
-    print('authpt obtenido: {}'.format(authpt))
 
     # acquired_resp_data = LoginClaroVideo.get_starter_header_info(authpt, hks, session)
     """
@@ -75,11 +65,8 @@ def main_with_json_param(json_arg: dict):
     acquired_resp_data = LoginClaroVideo.login_portal(
         script_arg_user, script_arg_password, session, authpt, hks, script_arg_region)
 
-    # DEBUG
-    print(acquired_resp_data)
-
     """
-    Se realiza una peticion a la url de push session, este paso es necesario para poder ingresar correctamente a la 
+    Se realiza una peticion a la url de push session, este paso es necesario para poder ingresar correctamente a la
     plataforma y tener acceso a la informacion de los play button en la peticiones web posteriores
     """
     acquired_resp_data = LoginClaroVideo.push_session(acquired_resp_data, session, script_arg_region)
@@ -88,7 +75,7 @@ def main_with_json_param(json_arg: dict):
     se itera por grupos/pedazos de 49 ids y se realiza las peticiones de manera paralela para obtener la informacion
     del play button y la fecha de vigencia.
     """
-    for chunk_id in IterableUtils.chunker(group_id_list, 40):
+    for chunk_id in IterableUtils.chunker(group_id_list, 49):
         result_purchase_button_list.extend(
             MultithreadingUtils.process_data_id_group_requests(
                 chunk_id, session, acquired_resp_data, json_arg['region'], nodo_obtained))
@@ -96,6 +83,7 @@ def main_with_json_param(json_arg: dict):
     """
     Se convierte el array y dictionario final en una cadena en formato JSON y se imprime en consola
     """
+
     result_purchase_button_list = {'result': result_purchase_button_list}
     json_string = json.dumps(result_purchase_button_list)
     session.close()
