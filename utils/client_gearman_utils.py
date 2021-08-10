@@ -2,15 +2,16 @@ import copy
 import json
 from constants import constants as const
 
+
 class ClientGearmanUtils:
 
     @staticmethod
-    def generate_gearman_job_list():
+    def generate_gearman_job_list(user: str, password: str):
         job_list = []
 
         param_dict = {
-            "user": "clarovideomty01@gmail.com",
-            "password": "C14r0.V1de0.12",
+            "user": user,
+            "password": password,
             "region": "mexico",
             "filter_id": "",
             "node_id": ""

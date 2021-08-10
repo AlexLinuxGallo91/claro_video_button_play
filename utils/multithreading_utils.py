@@ -8,7 +8,7 @@ class MultithreadingUtils:
 
     @staticmethod
     def process_data_id_group_requests(list_group_id: list, session: Session, acquired_resp_data: ResponseDataObj,
-                                       region: str, nodo_obtained : str):
+                                       region: str, nodo_obtained: str):
         """
         Metodo el cual se encarga de la paralelizacion de las peticiones a la API de Claro Video para la obtencion
         de los datos del play button y las fechas de vigencia. Para ello se requiere la lista de group_id

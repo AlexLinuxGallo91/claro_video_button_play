@@ -6,9 +6,6 @@ from id_group_data.id_group_api_data import IdGroupApi
 from login_claro_video.claro_video_login import LoginClaroVideo
 from utils.iterable_utils import IterableUtils
 from utils.multithreading_utils import MultithreadingUtils
-from utils.arguments_utils import ArgumentsUtils
-from utils.json_utils import JsonUtils
-import sys
 
 
 def main_with_json_param(json_arg: dict):

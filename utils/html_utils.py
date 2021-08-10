@@ -1,5 +1,5 @@
 import re
-import html
+
 from constants import constants as const
 
 
@@ -11,14 +11,16 @@ class HtmlUtils:
         list_nodes = []
         str_nodes = ''
 
-        for node_data_json in list_nodes:
+        for node_data_json in list_errors:
             if 'nodo' in node_data_json:
                 list_nodes.append(node_data_json['nodo'])
 
         list_nodes = list(dict.fromkeys(list_nodes))
         str_nodes = ', '.join(list_nodes)
 
-        return const.SUBJECT_MAIL_INCONSISTENCIA_PLAY_BUTTON.format(str_nodes, region)
+        subject = const.SUBJECT_MAIL_INCONSISTENCIA_PLAY_BUTTON.format(str_nodes, region)
+        print(subject)
+        return subject
 
 
     @staticmethod

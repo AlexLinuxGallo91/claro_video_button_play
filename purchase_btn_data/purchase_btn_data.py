@@ -41,6 +41,7 @@ class PurchaseBtnData:
 
         json_expired_date_obtained = {}
         json_expired_date_obtained['NOMBRE_INTERNO'] = json_resp['_source']['NOMBRE_INTERNO']
+        json_expired_date_obtained['FORMATO'] = json_resp['_source']['FORMATO']
 
         for region in json_resp['_source']['INFO_REGION_DERECHOS']:
             if region['REGION'] == 'MX':
@@ -59,7 +60,7 @@ class PurchaseBtnData:
                 date_until = datetime.datetime(int(anio), int(mes), int(dia))
                 json_expired_date_obtained['FECHA_HASTA'] = '{}-{}-{}'.format(dia, mes, anio)
 
-                is_in_force = 1 if date_until >= datetime.datetime.now() else 0
+                is_in_force = 1 if date_until.date() >= datetime.datetime.now().date() else 0
                 json_expired_date_obtained['VIGENCIA'] = is_in_force
                 json_expired_date_obtained['group_id'] = group_id
 

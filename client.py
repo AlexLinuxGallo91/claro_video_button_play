@@ -1,13 +1,13 @@
+import datetime
 import json
+import time
 
 from python3_gearman import GearmanClient
 
-import constants.constants as const
 from utils.client_gearman_utils import ClientGearmanUtils
 from utils.html_utils import HtmlUtils
 from utils.json_utils import JsonUtils
 from utils.mail_utils import MailUtils
-import time
 
 tiempo_de_inicio = time.time()
 
@@ -21,24 +21,18 @@ email_addresses = ['alexis.araujo@triara.com',
                    'gerardo.trevino@triara.com']
 
 # se obtiene la lista de jobs por ejecutar, con sus distintos node_id y filter_id
-job_list = ClientGearmanUtils.generate_gearman_job_list()
+job_list = ClientGearmanUtils.generate_gearman_job_list(user='', password='')
 region = ''
 
-# # se mandan a ejecutar la lista de jobs a los distintos worker
-# submitted_requests = gm_client.submit_multiple_jobs(job_list, background=False, wait_until_complete=False)
-#
-# # se espera a que todos los jobs se hayan finalizado, en caso de que un job sobrepase 300 segundos, se omite
-# completed_jobs = gm_client.wait_until_jobs_completed(submitted_requests, poll_timeout=300)
-
 # bandera para debug
-modo_debug = True
+modo_debug = False
 
 for job_task_arg in job_list:
     json_args = json.loads(job_task_arg['data'])
     region = json_args['region']
     print('nodo en revision: {} de la region {}'.format(json_args['node_name'], region))
 
-    submitted_job = gm_client.submit_job(job_task_arg['task'], job_task_arg['data'], poll_timeout=480)
+    submitted_job = gm_client.submit_job(job_task_arg['task'], job_task_arg['data'], poll_timeout=3600)
     text_result_job = submitted_job.result
 
     try:
@@ -60,7 +54,8 @@ print('\nnumero total de errores obtenidos: {}'.format(len(json_list_errors_resu
 while len(json_list_errors_result) >= 150:
     del json_list_errors_result[-1]
 
-print('Numero de errores a enviar por medio del debug (se redujo a un numero menor): {}'.format(len(json_list_errors_result)))
+print('Numero de errores a enviar por medio del debug (se redujo a un numero menor): {}'.
+      format(len(json_list_errors_result)))
 
 # verifica que al menos no haya algun error localizado en la lista de errores/validaciones de las vigencias y push
 # buttons, en caso contrario, se envia la notificacion por email
@@ -70,4 +65,6 @@ if len(json_list_errors_result) > 0:
     resp = MailUtils.send_email(email_addresses, 'notificacion.itoc@triara.com', subject, HTML)
     print(resp.text)
 
-print('tiempo total de finalizacion de ejecucion del script: {}'.format(time.time() - tiempo_de_inicio))
+tiempo_obtenido = time.time() - tiempo_de_inicio
+tiempo_obtenido = str(datetime.timedelta(seconds=tiempo_obtenido))
+print('tiempo total de finalizacion de ejecucion del script: {}'.format(tiempo_obtenido))
