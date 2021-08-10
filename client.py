@@ -21,7 +21,7 @@ email_addresses = ['alexis.araujo@triara.com',
                    'gerardo.trevino@triara.com']
 
 # se obtiene la lista de jobs por ejecutar, con sus distintos node_id y filter_id
-job_list = ClientGearmanUtils.generate_gearman_job_list(user='', password='')
+job_list = ClientGearmanUtils.generate_gearman_job_list(user='clarovideomty01@gmail.com', password='C14r0.V1de0.12')
 region = ''
 
 # bandera para debug
@@ -51,8 +51,12 @@ for job_task_arg in job_list:
 
 print('\nnumero total de errores obtenidos: {}'.format(len(json_list_errors_result)))
 
-while len(json_list_errors_result) >= 150:
-    del json_list_errors_result[-1]
+# while len(json_list_errors_result) >= 150:
+#     del json_list_errors_result[-1]
+
+# while len(json_list_errors_result) <= 200:
+#     list_copy = json_list_errors_result.copy()
+#     json_list_errors_result = json_list_errors_result.extend(list_copy)
 
 print('Numero de errores a enviar por medio del debug (se redujo a un numero menor): {}'.
       format(len(json_list_errors_result)))
