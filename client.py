@@ -10,8 +10,10 @@ from utils.json_utils import JsonUtils
 from utils.mail_utils import MailUtils
 
 tiempo_de_inicio = time.time()
-
-gm_client = GearmanClient(['localhost:4771'])
+ip = 'localhost'
+port = '4471'
+#port = '4730'
+gm_client = GearmanClient(['{}:{}'.format(ip, port)])
 
 json_list_errors_result = []
 
@@ -21,7 +23,7 @@ email_addresses = ['alexis.araujo@triara.com',
                    'gerardo.trevino@triara.com']
 
 # se obtiene la lista de jobs por ejecutar, con sus distintos node_id y filter_id
-job_list = ClientGearmanUtils.generate_gearman_job_list(user='clarovideomty01@gmail.com', password='C14r0.V1de0.12')
+job_list = ClientGearmanUtils.generate_gearman_job_list(user='', password='')
 region = ''
 
 # bandera para debug
