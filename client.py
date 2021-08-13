@@ -85,6 +85,9 @@ for job_task_arg in job_list:
         resp = MailUtils.send_email(email_addresses, 'notificacion.itoc@triara.com', subject, html_body_message)
         print(resp.text)
 
+    else:
+        print('No se encontraron de manera exitosa, inconsistencias en los nodos.')
+
     tiempo_obtenido = time.time() - begin_time
     tiempo_obtenido = str(datetime.timedelta(seconds=tiempo_obtenido))
     print('tiempo total de finalizacion de ejecucion del script: {}'.format(tiempo_obtenido))
