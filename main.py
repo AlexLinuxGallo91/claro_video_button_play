@@ -160,5 +160,5 @@ def main_test_with_each_node(user_login_claro_video: str, password_login_claro_v
 
 
 if __name__ == '__main__':
-    main_test_with_each_node('clarovideomty01@gmail.com', 'C14r0.V1de0.12', True, './xlsx_data_generated',
-                             'devagallo91y@gmail.com', 'pythonlove91')
+    # main_test_with_each_node()
+    pass
