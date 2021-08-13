@@ -12,14 +12,14 @@ from utils.xlsx_utils import XlsxUtils
 
 begin_time = time.time()
 ip = 'localhost'
-# port = '4471'
-port = '4730'
+port = '4471'
+# port = '4730'
 gm_client = GearmanClient(['{}:{}'.format(ip, port)])
 path_dir_save_file_xlsx = './xlsx_play_button_reports'
-gmail_account = 'devagallo91y@gmail.com'
-gmail_password = 'pythonlove91'
-claro_video_account = 'clarovideomty01@gmail.com'
-claro_video_pass_account = 'C14r0.V1de0.12'
+gmail_account = ''
+gmail_password = ''
+claro_video_account = ''
+claro_video_pass_account = ''
 
 json_list_errors_result = []
 
