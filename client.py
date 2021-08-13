@@ -78,6 +78,7 @@ for job_task_arg in job_list:
         subject = HtmlUtils.generate_subject_email_by_list_play_button_errors(json_list_errors_result, region)
         MailUtils.send_email_with_google_account_and_file_attach(
             gmail_account, gmail_password, path_xlsx_file, subject, email_addresses)
+        print('Se envio el correo con archivo excel adjunto: {}'.format(xlsx_filename))
 
     elif 0 < errors_count < 100:
         html_body_message = HtmlUtils.generate_html_table_errors_push_buttons(json_list_errors_result)
