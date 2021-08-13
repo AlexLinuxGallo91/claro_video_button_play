@@ -33,7 +33,7 @@ job_list = ClientGearmanUtils.generate_gearman_job_list(user=claro_video_account
 region = ''
 
 # bandera para debug
-modo_debug = False
+modo_debug = True
 
 for job_task_arg in job_list:
     json_args = json.loads(job_task_arg['data'])
@@ -62,12 +62,12 @@ for job_task_arg in job_list:
     # buttons, en caso contrario, se envia la notificacion por email
     errors_count = len(json_list_errors_result)
 
-    # # debug
-    # if 0 < errors_count < 100:
-    #     while errors_count < 500:
-    #         copy_list_errors = list_errors_final_result[:]
-    #         list_errors_final_result.extend(copy_list_errors)
-    #         errors_count = len(list_errors_final_result)
+    # debug
+    if 0 < errors_count < 100:
+        while errors_count < 200:
+            copy_list_errors = json_list_errors_result[:]
+            json_list_errors_result.extend(copy_list_errors)
+            errors_count = len(json_list_errors_result)
 
     if errors_count >= 100:
         date_now_xlsx_file = datetime.datetime.now().strftime('%m_%d_%Y__%H_%M_%S')
