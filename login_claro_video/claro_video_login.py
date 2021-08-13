@@ -28,13 +28,13 @@ class LoginClaroVideo:
             text = script_tag.text.strip()
 
             if 'window.claro = ' in text:
-                text = text.replace('window.claro = ','')
+                text = text.replace('window.claro = ', '')
                 text = text.replace(';', '')
 
                 for l in text.splitlines():
 
                     if 'apiParams:' in l.strip():
-                        l = l.replace('apiParams:','')
+                        l = l.replace('apiParams:', '')
                         l = l.strip()
                         l = l.rstrip(l[-1])
                         dict_params = json.loads(l)

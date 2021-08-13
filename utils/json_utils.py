@@ -24,7 +24,7 @@ class JsonUtils:
         if 'result' in json_result:
 
             if len(json_result['result']) < 1:
-                print('no se encontraron id_groups en este nodo :(')
+                print('no se encontraron id_groups en este nodo.')
 
             for data_json_serie in json_result['result']:
 
@@ -32,7 +32,7 @@ class JsonUtils:
                 # pelicula
                 formato = data_json_serie['date_info_expiration']['FORMATO']
 
-                if not JsonUtils.is_valid_type_format(data_json_serie):
+                if not JsonUtils.is_valid_type_format(data_json_serie) and not debug_mode:
                     continue
 
                 json_data_expiration = {}

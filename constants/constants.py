@@ -5,9 +5,9 @@ la mayoria son utilizadas para hacer las peticiones web a la API de Claro Video
 
 LOGIN_MAIN_PAGE = 'https://www.clarovideo.com'
 
-LOGIN_REQ_CLARO_VIDEO = 'https://mfwkweb-api.clarovideo.net/services/user/login?device_id=web&device_category=web&device_' \
-                        'model=web&device_type=web&device_so=Firefox&format=json&device_manufacturer=generic&authpn=' \
-                        'webclient&authpt={}&api_version=v5.92&region={}&HKS={}&incl' \
+LOGIN_REQ_CLARO_VIDEO = 'https://mfwkweb-api.clarovideo.net/services/user/login?device_id=web&device_category=web&' \
+                        'device_model=web&device_type=web&device_so=Firefox&format=json&device_manufacturer=generic&' \
+                        'authpn=webclient&authpt={}&api_version=v5.92&region={}&HKS={}&incl' \
                         'udpaywayprofile=true'
 
 PUSH_SESION_REQ_CLARO_VIDEO = "https://mfwkweb-api.clarovideo.net/services/user/push_session?user_id={}&" \
@@ -41,6 +41,56 @@ SUBJECT_MAIL_INCONSISTENCIA_PLAY_BUTTON = 'Notificación de inconsistencia en pl
 # HTML
 HTML_MSG_NOTIFICACION_PLAY_BUTTON = '<p>Se notifica una inconsistencia del boton de play, detectada en el monitoreo ' \
                                     'interno de Triara del Servicio de Claro Video:</p><br>'
+
+HTML_BODY_EMAIL_GMAIL_MESSAGE = \
+    '<html> <head> <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> <style> <!-- @font-face ' \
+    '{ font-family: Calibri } @font-face { font-family: Tahoma } p.MsoNormal, li.MsoNormal, div.MsoNormal { margin: ' \
+    '0cm; margin-bottom: .0001pt; font-size: 11.0pt; font-family: "Calibri", "sans-serif" } a:link, span.MsoHyperlink' \
+    ' { color: blue; text-decoration: underline } a:visited, span.MsoHyperlinkFollowed { color: purple; text-decorati' \
+    'on: underline } p.MsoAcetate, li.MsoAcetate, div.MsoAcetate { margin: 0cm; margin-bottom: .0001pt; font-size: 8' \
+    '.0pt; font-family: "Tahoma", "sans-serif" } span.TextodegloboCar { font-family: "Tahoma", "sans-serif" } span.e' \
+    'mailstyle17 { font-family: "Calibri", "sans-serif"; color: windowtext } span.balloontextchar { font-family: "Ta' \
+    'homa", "sans-serif" } span.EstiloCorreo21 { font-family: "Calibri", "sans-serif"; color: #4A442A } .MsoChpDefau' \
+    'lt { font-size: 10.0pt } @page WordSection1 { margin: 70.85pt 3.0cm 70.85pt 3.0cm } div.WordSection1 {} --> </s' \
+    'tyle> </head> <body lang="ES-MX" link="blue" vlink="purple"> <div class="WordSection1"> <p class="MsoNormal"></' \
+    'p> <div> <p class="MsoNormal"> <img width="677" height="138" id="_x0031__x0020_Imagen" src="http://200.57.138.13' \
+    '4/ITOC/images/bannerItoc.jpg" alt="bannerItoc.jpg"> </p> <p class="MsoNormal"></p> <p>Se notifica una inconsiste' \
+    'ncia del boton de play, detectada en el monitoreo interno de Triara del Servicio de Claro Video. Se adjunta ' \
+    'archivo excel con la informacion de inconsistencias detectadas.</p> <p cl' \
+    'ass="MsoNormal"> <span lang="EN-US"></span> </p> <p class="MsoNormal"> <span style="color:#1F497D"></span> </p> ' \
+    '<br> <p class="MsoNormal"> <span style="color:black">Saludos cordiales,</span> </p> <p class="MsoNormal">' \
+    '</p> </div> <br> <p class="MsoNormal"> <span style="color:#4A442A"></span> </p> <table class="MsoNormalTable" ' \
+    'border="0" cellspacing="6" cellpadding="0" width="567" style="width:15.0cm"> <tbody> <tr style="height:22.5pt">' \
+    ' <td width="142" rowspan="3" valign="top" style="width:106.5pt; padding:0cm 0cm 0cm 0cm; height:22.5pt"> <p ' \
+    'class="MsoNormal"> <img width="100" height="88" id="Imagen_x0020_3" src="http://200.57.138.134/ITOC/images/tri' \
+    'aralogo.jpg" alt="triaralogo.jpg"> </p> <p class="MsoNormal" align="center" style="text-align:left"> <span sty' \
+    'le="font-size:8.0pt; color:gray">ISO 9001:2008</span> <span style="color:#4A442A"></span> </p> <p class="MsoNo' \
+    'rmal" align="center" style="text-align:left"> <span style="font-size:8.0pt; color:gray">ISO 14001:2004</span>' \
+    ' <span style="color:#4A442A"></span> </p> <p class="MsoNormal" align="center" style="text-align:left"> <span ' \
+    'style="font-size:8.0pt; color:gray">ISO 27001:2013</span> <span style="color:#4A442A"></span> </p> <p class="M' \
+    'soNormal" align="center" style="text-align:left"> <span style="font-size:8.0pt; color:gray">ISO 20000-1:2011</' \
+    'span> <span style="color:#4A442A"></span> </p> <p class="MsoNormal" align="center" style="text-align:left"> <s' \
+    'pan style="font-size:8.0pt; color:gray">ICREA-STD-131-2013</span> <span style="color:#4A442A"></span> </p> <p ' \
+    'class="MsoNormal" align="center" style="text-align:left"> <span style="font-size:8.0pt; color:gray">ISAE3402/S' \
+    'SAE16</span> <span style="color:#4A442A"></span> </p> </td> <td width="407" valign="top" style="width:305.25pt; ' \
+    'padding:0cm 0cm 0cm 0cm; height:22.5pt"> <p class="MsoNormal"> <span style="font-size:7.5pt; font-family:" Ari' \
+    'al?,?sans-serif?;color:#666666?=""></span> </p> <p class="MsoNormal"> <span style="font-size:9pt; font-family:"' \
+    ' Arial?,?sans-serif?;color:#666666?="">Centro Integral de Monitoreo y Gestión ITOC</span> <span style="color:#' \
+    '4A442A"></span> </p> </td> </tr> <tr style="height:41.25pt"> <td style="padding:0cm 0cm 0cm 0cm; height:41.25p' \
+    't"> <p class="MsoNormal"> <span style="font-size:7.5pt; color:#666666">Triara Data Center</span> <span style=' \
+    '"font-size:7.5pt; color:#1F497D"></span> <span style="color:#4A442A"></span> </p> <p class="MsoNormal"> <span ' \
+    'style="font-size:7.5pt; color:#666666">Libramiento Santa Rosa 111</span> <span style="color:#4A442A"></span> ' \
+    '</p> <p class="MsoNormal"> <span style="font-size:7.5pt; color:#666666">Col. Futuro Apodaca, Apodaca NL 66600' \
+    '</span> <span style="font-size:7.5pt; color:#1F497D"></span> <span style="color:#4A442A"></span> </p> </td> ' \
+    '</tr> <tr style="height:52.5pt"> <td valign="top" style="padding:0cm 0cm 0cm 0cm; height:52.5pt"> <p class="' \
+    'MsoNormal"> <span style="font-size:7.5pt; color:#666666">Telefono: (81) 81962744</span> <span style="color:' \
+    '#4A442A"></span> </p> <p class="MsoNormal"> <span style="font-size:7.5pt; color:#666666"> <br> Correo: </span> ' \
+    '<u> <span style="font-size:7.5pt; color:blue">operacion.itoc@triara.com</span> </u> <span style="color:#4A442A">' \
+    '</span> </p> </td> </tr> </tbody> </table> <p class="MsoNormal"> <img width="299" height="50" id="Imagen_x0020_2' \
+    '" src="http://200.57.138.134/ITOC/images/telmexlogo.jpg" alt=" Description: Telmex estÃ¡ contigo"> </p> <p class' \
+    '="MsoNormal"> <span style="color:#4A442A"></span> </p> <p class="MsoNormal"> <span style="color:#4A442A"></span>' \
+    ' </p> <p class="MsoNormal"></p> </div> <font size="2" face="Arial">Aviso de Privacidad: http://www.telmex.com/' \
+    'web/acerca-de-telmex/aviso-triara </font> </body></html>'
 
 HTML_TABLE = '<table style="{}">{}</table>'
 HTML_TABLE_TR = '<tr style="{}">{}</tr>'
