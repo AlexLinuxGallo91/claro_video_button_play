@@ -30,8 +30,6 @@ class JsonUtils:
 
                 # verifica que si este dentro de los tipos de formatos validos, en caso contrario, se omite la serie/
                 # pelicula
-                formato = data_json_serie['date_info_expiration']['FORMATO']
-
                 if not JsonUtils.is_valid_type_format(data_json_serie) and not debug_mode:
                     continue
 

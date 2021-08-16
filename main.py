@@ -142,7 +142,7 @@ def main_test_with_each_node(user_login_claro_video: str, password_login_claro_v
         date_now_xlsx_file = datetime.datetime.now().strftime('%m_%d_%Y__%H_%M_%S')
         xlsx_filename = 'play_button_result_{}.xlsx'.format(date_now_xlsx_file)
         path_xlsx_file = '{}/{}'.format(path_dir_save_file_xlsx, xlsx_filename)
-        XlsxUtils.create_xlsx_file_from_list_errors(list_errors_final_result, path_xlsx_file)
+        XlsxUtils.create_xlsx_file_from_list_json_data_errors(list_errors_final_result, path_xlsx_file)
 
         subject = HtmlUtils.generate_subject_email_by_list_play_button_errors(list_errors_final_result, region)
         MailUtils.send_email_with_google_account_and_file_attach(
@@ -156,7 +156,7 @@ def main_test_with_each_node(user_login_claro_video: str, password_login_claro_v
 
     tiempo_obtenido = time.time() - tiempo_de_inicio
     tiempo_obtenido = str(datetime.timedelta(seconds=tiempo_obtenido))
-    print('tiempo total de finalizacion de ejecucion del script: {}'.format(tiempo_obtenido))
+    print('Tiempo total de finalizacion de ejecucion del script: {}'.format(tiempo_obtenido))
 
 
 if __name__ == '__main__':

@@ -1,11 +1,22 @@
+import datetime
+
 import xlsxwriter
+
 import constants.constants as const
 
 
 class XlsxUtils:
 
     @staticmethod
-    def create_xlsx_file_from_list_errors(list_errors: list, path: str):
+    def generate_report_xlsx_path_str(path_dir_report: str):
+        date_now_xlsx_file = datetime.datetime.now().strftime('%m_%d_%Y__%H_%M_%S')
+        xlsx_filename = 'play_button_result_{}.xlsx'.format(date_now_xlsx_file)
+        path_xlsx_file = '{}/{}'.format(path_dir_report, xlsx_filename)
+
+        return path_xlsx_file
+
+    @staticmethod
+    def create_xlsx_file_from_list_json_data_errors(list_errors: list, path: str):
         workbook = xlsxwriter.Workbook(path)
         worksheet = workbook.add_worksheet('play button inconsistencies')
         row = 0
