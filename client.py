@@ -3,6 +3,7 @@ import json
 import time
 
 from python3_gearman import GearmanClient
+from python3_gearman.errors import ServerUnavailable
 
 from utils.client_gearman_utils import ClientGearmanUtils
 from utils.html_utils import HtmlUtils
@@ -13,7 +14,7 @@ from utils.file_utils import FileUtils
 
 begin_time = time.time()
 ip = 'localhost'
-port = '4471'
+port = '4771'
 gm_client = GearmanClient(['{}:{}'.format(ip, port)])
 path_dir_save_file_xlsx = './xlsx_play_button_reports'
 gmail_account = ''
@@ -41,8 +42,14 @@ for job_task_arg in job_list:
     region = json_args['region']
     print('nodo en revision: {} de la region {}'.format(json_args['node_name'], region))
 
-    submitted_job = gm_client.submit_job(job_task_arg['task'], job_task_arg['data'], poll_timeout=time_wait_in_seconds)
-    text_result_job = submitted_job.result
+    try:
+        submitted_job = gm_client.submit_job(
+            job_task_arg['task'], job_task_arg['data'], poll_timeout=time_wait_in_seconds)
+
+        text_result_job = submitted_job.result
+    except ServerUnavailable as e:
+        print('Sucedio un error al intentar enviar el Job al Worker: {}'.format(e))
+        continue
 
     try:
         json_result = json.loads(text_result_job)
