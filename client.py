@@ -29,9 +29,13 @@ debug_mode = False  # Bandera para entrar en modo Debug
 debug_mode_send_email_with_report_xlsx = False
 
 # lista de destinatarios a enviar las notificaciones
-email_addresses = ['alexis.araujo@triara.com',
-                   'jose.hernandez@triara.com',
-                   'gerardo.trevino@triara.com']
+email_addresses = [
+    'alexis.araujo@triara.com',
+    'jose.hernandez@triara.com',
+    'gerardo.trevino@triara.com',
+    # 'noc.operaciones@triara.com',
+    # 'angel.galindo@triara.com'
+]
 
 # se obtiene la lista de jobs por ejecutar, con sus distintos node_id y filter_id
 job_list = ClientGearmanUtils.generate_gearman_job_list(
@@ -48,7 +52,7 @@ for job_task_arg in job_list:
 
         text_result_job = submitted_job.result
     except ServerUnavailable as e:
-        print('Sucedio un error al intentar enviar el Job al Worker: {}'.format(e))
+        print('Sucedio un error al intentar enviar el Job al Worker, worker no disponible: {}'.format(e))
         continue
 
     try:
@@ -76,6 +80,8 @@ if 0 < errors_count < 100 and debug_mode_send_email_with_report_xlsx:
         copy_list_errors = json_list_errors_result[:]
         json_list_errors_result.extend(copy_list_errors)
         errors_count = len(json_list_errors_result)
+
+print('Numero de incidencias localizadas: {}'.format(errors_count))
 
 if errors_count >= 100:
     # verifica que el folder de los reportes exista, de lo contrario intenta crearlo. Se crea el nuevo reporte xlsx
