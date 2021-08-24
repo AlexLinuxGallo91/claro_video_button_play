@@ -18,7 +18,7 @@ class HtmlUtils:
         list_nodes = list(dict.fromkeys(list_nodes))
         str_nodes = ', '.join(list_nodes)
 
-        subject = const.SUBJECT_MAIL_INCONSISTENCIA_PLAY_BUTTON.format(str_nodes, region)
+        subject = const.SUBJECT_MAIL_INCONSISTENCIA_PLAY_BUTTON.format(str_nodes, region.capitalize())
         print(subject)
         return subject
 

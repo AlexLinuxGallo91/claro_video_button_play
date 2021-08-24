@@ -1,6 +1,7 @@
 import datetime
 import json
 import time
+import logging
 
 from python3_gearman import GearmanClient
 from python3_gearman.errors import ServerUnavailable
@@ -24,6 +25,13 @@ claro_video_pass_account = ''
 time_wait_in_seconds = 7200  # 2 hrs
 json_list_errors_result = []
 debug_mode = False  # Bandera para entrar en modo Debug
+filename_log = './claro_video_play_button.log'
+
+# inicializa el logger
+logging.basicConfig(
+    level=logging.INFO, format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S',
+    filename=filename_log
+)
 
 # Bandera para generar mas de 100 errores y enviar el correo con el reporte xlsx adjunto
 debug_mode_send_email_with_report_xlsx = False
@@ -44,7 +52,7 @@ job_list = ClientGearmanUtils.generate_gearman_job_list(
 for job_task_arg in job_list:
     json_args = json.loads(job_task_arg['data'])
     region = json_args['region']
-    print('nodo en revision: {} de la region {}'.format(json_args['node_name'], region))
+    logging.info('nodo en revision: {} de la region {}'.format(json_args['node_name'], region))
 
     try:
         submitted_job = gm_client.submit_job(
@@ -52,7 +60,7 @@ for job_task_arg in job_list:
 
         text_result_job = submitted_job.result
     except ServerUnavailable as e:
-        print('Sucedio un error al intentar enviar el Job al Worker, worker no disponible: {}'.format(e))
+        logging.info('Sucedio un error al intentar enviar el Job al Worker, worker no disponible: {}'.format(e))
         continue
 
     try:
@@ -63,11 +71,11 @@ for job_task_arg in job_list:
             json_list_errors_result.extend(list_errors_obtained)
 
     except ValueError as e:
-        print('Sucedio un error ValueError al momento de convertir el resultado string del job a json: {}.\n '
+        logging.info('Sucedio un error ValueError al momento de convertir el resultado string del job a json: {}.\n '
               'resultado obtenido: {}'.format(e, text_result_job))
 
     except TypeError as e:
-        print('Sucedio un error TypeError al momento de convertir el resultado string del job a json: {}.\n '
+        logging.info('Sucedio un error TypeError al momento de convertir el resultado string del job a json: {}.\n '
               'resultado obtenido: {}'.format(e, text_result_job))
 
 # verifica que al menos no haya algun error localizado en la lista de errores/validaciones de las vigencias y push
@@ -81,7 +89,7 @@ if 0 < errors_count < 100 and debug_mode_send_email_with_report_xlsx:
         json_list_errors_result.extend(copy_list_errors)
         errors_count = len(json_list_errors_result)
 
-print('Numero de incidencias localizadas: {}'.format(errors_count))
+logging.info('Numero de incidencias localizadas: {}'.format(errors_count))
 
 if errors_count >= 100:
     # verifica que el folder de los reportes exista, de lo contrario intenta crearlo. Se crea el nuevo reporte xlsx
@@ -97,7 +105,7 @@ if errors_count >= 100:
     # por ultimo para no ocupar tanto espacio en el disco, se elmimina el reporte generado en el path del server
     FileUtils.remove_file_from_path_str(path_report_xlsx_to_create)
 
-    print('Se envio el correo con archivo excel adjunto: {}'.format(path_report_xlsx_to_create))
+    logging.info('Se envio el correo con archivo excel adjunto: {}'.format(path_report_xlsx_to_create))
 
 # si son menos de 100 errores encontrados, se envia el correo sin generar un reporte xlsx, por medio de la api de
 # correo y en texto HTML
@@ -105,11 +113,11 @@ elif 0 < errors_count < 100:
     html_body_message = HtmlUtils.generate_html_table_errors_push_buttons(json_list_errors_result)
     subject = HtmlUtils.generate_subject_email_by_list_play_button_errors(json_list_errors_result, region)
     resp = MailUtils.send_email(email_addresses, 'notificacion.itoc@triara.com', subject, html_body_message)
-    print(resp.text)
+    logging.info(resp.text)
 
 else:
-    print('Analisis exitoso, no se encontraron inconsistencias en los nodos verificados.')
+    logging.info('Analisis exitoso, no se encontraron inconsistencias en los nodos verificados.')
 
 time_obtained = time.time() - begin_time
 time_obtained = str(datetime.timedelta(seconds=time_obtained))
-print('tiempo total de finalizacion de ejecucion del script: {}'.format(time_obtained))
+logging.info('tiempo total de finalizacion de ejecucion del script: {}'.format(time_obtained))
