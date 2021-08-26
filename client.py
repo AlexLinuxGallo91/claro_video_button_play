@@ -25,7 +25,7 @@ claro_video_pass_account = ''
 time_wait_in_seconds = 7200  # 2 hrs
 json_list_errors_result = []
 debug_mode = False  # Bandera para entrar en modo Debug
-filename_log = './claro_video_play_button.log'
+filename_log = '/home/trjlha/scripts/claro_video_button_play_test/claro_video_play_button.log'
 
 # inicializa el logger
 logging.basicConfig(
@@ -39,10 +39,10 @@ debug_mode_send_email_with_report_xlsx = False
 # lista de destinatarios a enviar las notificaciones
 email_addresses = [
     'alexis.araujo@triara.com',
-    # 'jose.hernandez@triara.com',
-    # 'gerardo.trevino@triara.com',
-    # 'noc.operaciones@triara.com',
-    # 'angel.galindo@triara.com'
+    'jose.hernandez@triara.com',
+    'gerardo.trevino@triara.com',
+    'noc.operaciones@triara.com',
+    'angel.galindo@triara.com'
 ]
 
 logging.info('Inicializando ejecucion del script.')
@@ -73,6 +73,9 @@ for job_task_arg in job_list:
             logging.info('Numero de errores obtenidos en el nodo {}: {}'.format(
                 json_args['node_name'], len(list_errors_obtained)))
             json_list_errors_result.extend(list_errors_obtained)
+        else:
+            logging.info(
+                'No contiene la propiedad result, dentro del json, imprimiendo el json:\n {}'.format(json_result))
 
     except ValueError as e:
         logging.info('Sucedio un error ValueError al momento de convertir el resultado string del job a json: {}.\n '
