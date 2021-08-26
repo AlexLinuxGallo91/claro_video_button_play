@@ -39,11 +39,13 @@ debug_mode_send_email_with_report_xlsx = False
 # lista de destinatarios a enviar las notificaciones
 email_addresses = [
     'alexis.araujo@triara.com',
-    'jose.hernandez@triara.com',
-    'gerardo.trevino@triara.com',
+    # 'jose.hernandez@triara.com',
+    # 'gerardo.trevino@triara.com',
     # 'noc.operaciones@triara.com',
     # 'angel.galindo@triara.com'
 ]
+
+logging.info('Inicializando ejecucion del script.')
 
 # se obtiene la lista de jobs por ejecutar, con sus distintos node_id y filter_id
 job_list = ClientGearmanUtils.generate_gearman_job_list(
@@ -68,15 +70,17 @@ for job_task_arg in job_list:
 
         if 'result' in json_result:
             list_errors_obtained = JsonUtils.exist_errors_in_play_button_data(json_result, debug_mode)
+            logging.info('Numero de errores obtenidos en el nodo {}: {}'.format(
+                json_args['node_name'], len(list_errors_obtained)))
             json_list_errors_result.extend(list_errors_obtained)
 
     except ValueError as e:
         logging.info('Sucedio un error ValueError al momento de convertir el resultado string del job a json: {}.\n '
-              'resultado obtenido: {}'.format(e, text_result_job))
+                     'resultado obtenido: {}'.format(e, text_result_job))
 
     except TypeError as e:
         logging.info('Sucedio un error TypeError al momento de convertir el resultado string del job a json: {}.\n '
-              'resultado obtenido: {}'.format(e, text_result_job))
+                     'resultado obtenido: {}'.format(e, text_result_job))
 
 # verifica que al menos no haya algun error localizado en la lista de errores/validaciones de las vigencias y push
 # buttons, en caso contrario, se envia la notificacion por email
@@ -89,7 +93,7 @@ if 0 < errors_count < 100 and debug_mode_send_email_with_report_xlsx:
         json_list_errors_result.extend(copy_list_errors)
         errors_count = len(json_list_errors_result)
 
-logging.info('Numero de incidencias localizadas: {}'.format(errors_count))
+logging.info('Numero de incidencias encontradas en total: {}'.format(errors_count))
 
 if errors_count >= 100:
     # verifica que el folder de los reportes exista, de lo contrario intenta crearlo. Se crea el nuevo reporte xlsx
