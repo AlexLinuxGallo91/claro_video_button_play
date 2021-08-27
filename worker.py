@@ -65,7 +65,9 @@ def test_claro_video_play_button(gearman_worker, gearman_job):
         response = main_with_json_param(json_arg)
 
     except Exception as e:
-        response_error['msg_error'] = 'Sucedio un error en la ejecucion del worker: {}.'.format(e)
+        response_error['msg_error'] = 'Sucedio un error en la ejecucion del worker: {}. ' \
+                                      'Argumentos JSON recibidos por el worker: {}. ' \
+                                      'Response obtenido por el worker: {}'.format(e, json_arg, response)
         response_error['hubo_error'] = True
         return json.dumps(response_error, indent=4)
 
