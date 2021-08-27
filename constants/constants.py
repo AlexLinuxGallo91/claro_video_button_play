@@ -39,7 +39,7 @@ SUBJECT_MAIL_INCONSISTENCIA_PLAY_BUTTON = 'Notificación de inconsistencia en pl
                                           'la región {} partición 1 - Global.'
 
 # HTML
-HTML_MSG_NOTIFICACION_PLAY_BUTTON = '<p>Se notifica una inconsistencia del boton de play, detectada en el monitoreo ' \
+HTML_MSG_NOTIFICACION_PLAY_BUTTON = '<p>Se notifican las siguientes inconsistencias detectadas en el monitoreo ' \
                                     'interno de Triara del Servicio de Claro Video:</p><br>'
 
 HTML_BODY_EMAIL_GMAIL_MESSAGE = \
